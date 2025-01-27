@@ -187,20 +187,19 @@ const Register = () => {
       {errors.termsAccepted && (
         <span className="text-red-500 text-sm font-bold">{errors.termsAccepted.message}</span>
       )}
-      <span className="grid grid-cols-2 gap-20 text-center md:px-5">
-        <button
-          type="submit"
-          className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl"
-        >
-          Crear Cuenta
-        </button>
-        <Link
-              to="/registeradmin"
-              className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl items-center"
-            >
-              Crear Cuenta Admin
-        </Link>
-      </span>
+      
+      <button
+        type="submit"
+        className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl"
+      >
+        Crear Cuenta
+      </button>
+      <Link
+        to="/registeradmin"
+        className="underline text-black p-2 items-center"
+      >
+        Quieres Registrar tu Coworking? Click Aquí
+      </Link>
     </form>
   );
 };
