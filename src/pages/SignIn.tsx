@@ -75,6 +75,9 @@ const SignIn = () => {
             Crea tu cuenta
           </Link>
         </span>
+        <Link to="/recover-password" className="text-sm underline">
+          Recuperar Contraseña
+        </Link>
         <button
           type="submit"
           className="bg-rose-400 text-white p-2 font-bold hover:bg-rose-400 text-xl"

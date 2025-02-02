@@ -15,6 +15,8 @@ import { useAppContext } from "./contexts/AppContext";
 import MyHotels from "./pages/MyHotels";
 import EditHotel from "./pages/EditHotel";
 import Search from "./pages/Search";
+import RecoverPassword from "./pages/RecoverPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -58,6 +60,22 @@ const App = () => {
           element={
             <Layout>
               <SignIn />
+            </Layout>
+          }
+        />
+        <Route
+          path="/recover-password"
+          element={
+            <Layout>
+              <RecoverPassword />
+            </Layout>
+          }
+        />
+        <Route
+          path="/reset-password"
+          element={
+            <Layout>
+              <ResetPassword />
             </Layout>
           }
         />

@@ -1,11 +1,14 @@
 import { RegisterFormData } from "./pages/Register";
 import { RegisterFormDataAdmin } from "./pages/RegisterAdmin";
 import { SignInFormData } from "./pages/SignIn";
+import { RecoverPasswordFormData } from "./pages/RecoverPassword";
+import { ResetPasswordFormData } from "./pages/ResetPassword";
 import {
   HotelSearchResponse,
   HotelType,
   UserType,
 } from "../../backend/src/shared/types";
+//} from ".././shared/types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
@@ -209,4 +212,42 @@ export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
   }
 
   return response.json();
+};
+
+//Recuperar contraseña
+export const recoverPassword = async (formData: RecoverPasswordFormData) => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/forgot-password`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
+
+  if (!response.ok) {
+    const responseBody = await response.json();
+    throw new Error(responseBody.message || "Error al recuperar la contraseña");
+  }
+
+  return response.json();
+};
+
+export const resetPassword = async (formData: ResetPasswordFormData) => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/reset-password`, {
+    method: 'POST',
+    credentials: "include",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.log(errorData);
+    throw new Error(errorData.message || 'Something went wrong');
+  }
+
+  return response.json(); // O lo que sea que necesites devolver
 };
