@@ -13,12 +13,6 @@ export type RegisterFormDataAdmin = {
   direccion: string;
   telefono: string;
   email: string;
-  sitio_web: string;
-  direccion_facturacion: string;
-  responsable_facturacion: string;
-  email_facturacion: string;
-  identificacion_empresa: string;
-  comprobante_domicilio: string;
   password: string;
   confirmPassword: string;
   contrato_firmado: boolean;

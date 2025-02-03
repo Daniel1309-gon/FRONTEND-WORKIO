@@ -1,21 +1,31 @@
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import * as apiClient from "../api-client";
-import { BsBuilding, BsMap } from "react-icons/bs";
-import { BiHotel, BiMoney, BiStar } from "react-icons/bi";
+/* import { BsBuilding, BsMap } from "react-icons/bs";
+import { BiHotel, BiMoney, BiStar } from "react-icons/bi"; */
+import { motion } from "framer-motion";
+
+interface Coworking {
+  idsede: number;
+  telefono_sede: string;
+  tipo_via_principal: string;
+  via_principal: string;
+  via_secundaria: string;
+  complemento: string;
+}
 
 const MyHotels = () => {
-  const { data: hotelData } = useQuery(
-    "fetchMyHotels",
-    apiClient.fetchMyHotels,
-    {
-      onError: () => {},
-    }
-  );
+  const {
+    data: coworkingData,
+    isLoading,
+    isError,
+  } = useQuery<Coworking[]>("fetchMyCoworkings", apiClient.fetchMyCoworkings, {
+    onError: () => {},
+  });
 
-  if (!hotelData) {
-    return <span>Ningun Coworking encontrado</span>;
-  }
+  if (isLoading) return <span>Cargando coworkings...</span>;
+  if (isError || !coworkingData)
+    return <span>Ningún coworking encontrado</span>;
 
   return (
     <div className="space-y-5">
@@ -28,44 +38,21 @@ const MyHotels = () => {
           Anadir Coworking
         </Link>
       </span>
-      <div className="grid grid-cols-1 gap-8">
-        {hotelData.map((hotel) => (
-          <div
-            data-testid="hotel-card"
-            className="flex flex-col justify-between border border-slate-300 rounded-lg p-8 gap-5"
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+        {coworkingData.map((coworking) => (
+          <motion.div
+            key={coworking.idsede}
+            className="bg-white shadow-lg rounded-2xl p-4 flex flex-col"
+            whileHover={{ scale: 1.05 }}
           >
-            <h2 className="text-2xl font-bold">{hotel.name}</h2>
-            <div className="whitespace-pre-line">{hotel.description}</div>
-            <div className="grid grid-cols-5 gap-2">
-              <div className="border border-slate-300 rounded-sm p-3 flex items-center">
-                <BsMap className="mr-1" />
-                {hotel.city}, {hotel.country}
-              </div>
-              <div className="border border-slate-300 rounded-sm p-3 flex items-center">
-                <BsBuilding className="mr-1" />
-                {hotel.type}
-              </div>
-              <div className="border border-slate-300 rounded-sm p-3 flex items-center">
-                <BiMoney className="mr-1" />${hotel.pricePerNight} por dia
-              </div>
-              <div className="border border-slate-300 rounded-sm p-3 flex items-center">
-                <BiHotel className="mr-1" />
-                {hotel.adultCount} asistentes, {hotel.childCount} invitados
-              </div>
-              <div className="border border-slate-300 rounded-sm p-3 flex items-center">
-                <BiStar className="mr-1" />
-                {hotel.starRating} Estrellas de calificacion
-              </div>
-            </div>
-            <span className="flex justify-end">
-              <Link
-                to={`/edit-coworking/${hotel._id}`}
-                className="flex bg-blue-600 text-white text-xl font-bold p-2 hover:bg-blue-500"
-              >
-                Ver Detalles
-              </Link>
-            </span>
-          </div>
+            <p className="text-gray-600 mt-2">Direccion: {coworking.tipo_via_principal} {coworking.via_principal} #{coworking.via_secundaria} - {coworking.complemento}</p>
+            <p className="text-gray-500 text-sm mt-1">
+              Tel: {coworking.telefono_sede}
+            </p>
+            <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
+              Ver detalles
+            </button>
+          </motion.div>
         ))}
       </div>
     </div>

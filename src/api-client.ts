@@ -7,8 +7,8 @@ import {
   HotelSearchResponse,
   HotelType,
   UserType,
-} from "../../backend/src/shared/types";
-//} from ".././shared/types";
+//} from "../../backend/src/shared/types";
+} from ".././shared/types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
@@ -110,9 +110,12 @@ export const addMyHotel = async (hotelFormData: FormData) => {
   return response.json();
 };
 
-export const fetchMyHotels = async (): Promise<HotelType[]> => {
+export const fetchMyCoworkings = async () => {
   const response = await fetch(`${API_BASE_URL}/api/my-coworkings`, {
     credentials: "include",
+    headers:{
+      Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+    },
   });
 
   if (!response.ok) {
