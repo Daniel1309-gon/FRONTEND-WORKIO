@@ -1,4 +1,4 @@
-export const hotelTypes = [
+export const coworkingTypes = [
     "Privado",
     "Compartido",
     "Sala de Reuniones",
@@ -16,7 +16,7 @@ export const hotelTypes = [
     "Espacio para Proyectos Creativos",
 ];
   
-  export const hotelFacilities = [
+  export const coworkingFacilities = [
     "Free WiFi",
     "Parking",
     "Airport Shuttle",

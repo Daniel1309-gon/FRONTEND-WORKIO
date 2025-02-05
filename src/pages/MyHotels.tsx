@@ -7,7 +7,8 @@ import { motion } from "framer-motion";
 
 interface Coworking {
   idsede: number;
-  telefono_sede: string;
+  type: string;
+  name: string;
   tipo_via_principal: string;
   via_principal: string;
   via_secundaria: string;
@@ -45,9 +46,10 @@ const MyHotels = () => {
             className="bg-white shadow-lg rounded-2xl p-4 flex flex-col"
             whileHover={{ scale: 1.05 }}
           >
-            <p className="text-gray-600 mt-2">Direccion: {coworking.tipo_via_principal} {coworking.via_principal} #{coworking.via_secundaria} - {coworking.complemento}</p>
+            <h2 className="text-gray-600 mt-2">{coworking.name}</h2>
+            <p className="text-gray-500 text-sm mt-1">Direccion: {coworking.tipo_via_principal} {coworking.via_principal} #{coworking.via_secundaria} - {coworking.complemento}</p>
             <p className="text-gray-500 text-sm mt-1">
-              Tel: {coworking.telefono_sede}
+              Tipo: {coworking.type}
             </p>
             <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
               Ver detalles

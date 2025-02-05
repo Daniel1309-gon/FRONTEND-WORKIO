@@ -96,15 +96,15 @@ export const signOut = async () => {
   }
 };
 
-export const addMyHotel = async (hotelFormData: FormData) => {
+export const addMyCoworking = async (sedeFormData: FormData) => {
   const response = await fetch(`${API_BASE_URL}/api/my-coworkings`, {
     method: "POST",
     credentials: "include",
-    body: hotelFormData,
+    body: sedeFormData,
   });
 
   if (!response.ok) {
-    throw new Error("Failed to add hotel");
+    throw new Error("Failed to add coworking");
   }
 
   return response.json();

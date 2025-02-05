@@ -5,10 +5,10 @@ import FacilitiesSection from "./FacilitiesSection";
 import GuestsSection from "./GuestsSection";
 import ImagesSection from "./ImagesSection";
 //import { HotelType } from "../../../../backend/src/shared/types";
-import { HotelType } from "../../../shared/types";
+import { SedeType } from "../../../shared/types";
 import { useEffect } from "react";
 
-export type HotelFormData = {
+/* export type HotelFormData = {
   name: string;
   city: string;
   country: string;
@@ -21,25 +21,44 @@ export type HotelFormData = {
   imageUrls: string[];
   adultCount: number;
   childCount: number;
+}; */
+
+export type SedeFormData = {
+  name: string;
+  city: string;
+  country: string;
+  description: string;
+  type: string;
+  price_per_day: number;
+  starRating: number;
+  facilities: string[];
+  asistentes: number;
+  visitantes: number;
+  imageUrls: string[];
+  imageFiles: FileList;
+  tipo_via_principal: string;
+  via_principal: string;
+  via_secundaria: string;
+  complemento: string;
 };
 
 type Props = {
-  hotel?: HotelType;
-  onSave: (hotelFormData: FormData) => void;
+  sede?: SedeType;
+  onSave: (sedeFormData: FormData) => void;
   isLoading: boolean;
 };
 
-const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
-  const formMethods = useForm<HotelFormData>();
+const ManageHotelForm = ({ onSave, isLoading, sede }: Props) => {
+  const formMethods = useForm<SedeFormData>();
   const { handleSubmit, reset } = formMethods;
 
   useEffect(() => {
-    reset(hotel);
-  }, [hotel, reset]);
+    reset(sede);
+  }, [sede, reset]);
 
-  const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
+  /* const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
     const formData = new FormData();
-    if (hotel) {
+    if (sede) {
       formData.append("hotelId", hotel._id);
     }
     formData.append("name", formDataJson.name);
@@ -67,7 +86,42 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
     });
 
     onSave(formData);
+  }); */
+
+  const onSubmit = handleSubmit((formDataJson: SedeFormData) => {
+    const formData = new FormData();
+    
+    formData.append("name", formDataJson.name);
+    formData.append("city", formDataJson.city);
+    formData.append("country", formDataJson.country);
+    formData.append("description", formDataJson.description);
+    formData.append("type", formDataJson.type);
+    formData.append("price_per_day", formDataJson.price_per_day.toString());
+    formData.append("starRating", formDataJson.starRating.toString());
+    formData.append("asistentes", formDataJson.asistentes.toString());
+    formData.append("visitantes", formDataJson.visitantes.toString());
+    formData.append("tipo_via_principal", formDataJson.tipo_via_principal);
+    formData.append("via_principal", formDataJson.via_principal);
+    formData.append("via_secundaria", formDataJson.via_secundaria);
+    formData.append("complemento", formDataJson.complemento);
+
+    formDataJson.facilities.forEach((facility, index) => {
+      formData.append(`facilities[${index}]`, facility);
+    });
+
+    if (formDataJson.imageUrls) {
+      formDataJson.imageUrls.forEach((url, index) => {
+        formData.append(`imageUrls[${index}]`, url);
+      });
+    }
+
+    Array.from(formDataJson.imageFiles || []).forEach((imageFile) => {
+      formData.append(`imageFiles`, imageFile);
+    });
+
+    onSave(formData);
   });
+
 
   return (
     <FormProvider {...formMethods}>

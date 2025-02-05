@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form";
-import { HotelFormData } from "./ManageHotelForm";
+//import { HotelFormData } from "./ManageHotelForm";
+import { SedeFormData } from "./ManageHotelForm";
 
 const ImagesSection = () => {
   const {
@@ -7,7 +8,7 @@ const ImagesSection = () => {
     formState: { errors },
     watch,
     setValue,
-  } = useFormContext<HotelFormData>();
+  } = useFormContext<SedeFormData>();
 
   const existingImageUrls = watch("imageUrls");
 

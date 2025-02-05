@@ -1,11 +1,12 @@
 import { useFormContext } from "react-hook-form";
-import { HotelFormData } from "./ManageHotelForm";
+//import { HotelFormData } from "./ManageHotelForm";
+import { SedeFormData } from "./ManageHotelForm";
 
 const DetailsSection = () => {
   const {
     register,
     formState: { errors },
-  } = useFormContext<HotelFormData>();
+  } = useFormContext<SedeFormData>();
 
   return (
     <div className="flex flex-col gap-4">
@@ -63,10 +64,10 @@ const DetailsSection = () => {
           type="number"
           min={1}
           className="border rounded w-full py-1 px-2 font-normal"
-          {...register("pricePerNight", { required: "This field is required" })}
+          {...register("price_per_day", { required: "This field is required" })}
         ></input>
-        {errors.pricePerNight && (
-          <span className="text-red-500">{errors.pricePerNight.message}</span>
+        {errors.price_per_day && (
+          <span className="text-red-500">{errors.price_per_day.message}</span>
         )}
       </label>
       <label className="text-gray-700 text-sm font-bold max-w-[50%]">
@@ -87,6 +88,66 @@ const DetailsSection = () => {
         {errors.starRating && (
           <span className="text-red-500">{errors.starRating.message}</span>
         )}
+      </label>
+      <h2 className="text-2xl font-bold mb-3">Dirección</h2>
+      <label className="text-gray-700 text-sm font-bold flex-1">
+        Tipo de Vía Principal
+        <select
+          {...register("tipo_via_principal", {
+            required: "This field is required",
+          })}
+          className="border rounded w-full p-2 text-gray-700 font-normal"
+        >
+          <option value="">Selecciona tipo de vía</option>
+          {[
+            "Avenida Calle",
+            "Avenida Carrera",
+            "Calle",
+            "Carrera",
+            "Diagonal",
+            "Transversal",
+          ].map((tipo) => (
+            <option key={tipo} value={tipo}>
+              {tipo}
+            </option>
+          ))}
+        </select>
+        {errors.tipo_via_principal && (
+          <span className="text-red-500">
+            {errors.tipo_via_principal.message}
+          </span>
+        )}
+      </label>
+      <label className="text-gray-700 text-sm font-bold flex-1">
+        Vía Principal
+        <input
+          type="text"
+          className="border rounded w-full py-1 px-2 font-normal" 
+          placeholder="Número identificador de la vía"
+          {...register("via_principal", { required: "This field is required" })}
+        ></input>
+        {errors.via_principal && (
+          <span className="text-red-500">{errors.via_principal.message}</span>
+        )}
+      </label>
+      <label className="text-gray-700 text-sm font-bold flex-1">
+        Vía Secundaria
+        <input
+          type="text"
+          className="border rounded w-full py-1 px-2 font-normal"
+          placeholder="12b-21"
+          {...register("via_secundaria")}
+        ></input>
+      </label>
+      <label className="text-gray-700 text-sm font-bold flex-1">
+        Complemento
+        <input
+          type="text"
+          className="border rounded w-full py-1 px-2 font-normal"
+          placeholder="Edificio esquinero, etc..."
+          maxLength={50}
+          {...register("complemento")}
+        ></input>
       </label>
     </div>
   );
