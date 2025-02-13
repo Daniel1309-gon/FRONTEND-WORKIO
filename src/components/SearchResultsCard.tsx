@@ -15,7 +15,7 @@ const SearchResultsCard = ({ hotel }: Props) => {
     <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-300 rounded-lg p-8 gap-8">
       <div className="w-full h-[300px]">
         <img
-          src={hotel.imageUrls[0]}
+          src={hotel.image_urls[0]}
           className="w-full h-full object-cover object-center"
         />
       </div>
@@ -54,7 +54,7 @@ const SearchResultsCard = ({ hotel }: Props) => {
             </span>
           </div>
           <div className="flex flex-col items-end gap-1">
-            <span className="font-bold">${hotel.pricePerNight} por dia</span>
+            <span className="font-bold">${hotel.price_per_day} por dia</span>
             <Link
               to={`/detail/${hotel._id}`}
               className="bg-blue-600 text-white h-full p-2 font-bold text-xl max-w-fit hover:bg-blue-500"
