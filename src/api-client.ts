@@ -77,7 +77,7 @@ export const validateToken = async () => {
     credentials: "include",
   });
   
-  console.log(response);
+  console.log(response.body);
 
   if (!response.ok) {
     throw new Error("Token invalid");
