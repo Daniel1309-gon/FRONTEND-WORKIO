@@ -7,6 +7,11 @@ import {
 
 import aboutUsImage from "../assets/AcercaDe.png";
 
+fetch("https://backend-workio-80lm.onrender.com/test-cookie", {
+  method: "GET",
+  credentials: "include", 
+});
+
 const HomePage = () => {
   return (
     <div className="flex flex-col gap-4">
