@@ -4,8 +4,7 @@ import TypeSection from "./TypeSection";
 import FacilitiesSection from "./FacilitiesSection";
 import GuestsSection from "./GuestsSection";
 import ImagesSection from "./ImagesSection";
-//import { HotelType } from "../../../../backend/src/shared/types";
-import { SedeType } from "../../../shared/types";
+import { HotelType } from "../../../shared/types";
 import { useEffect } from "react";
 
 /* export type HotelFormData = {
@@ -44,7 +43,7 @@ export type SedeFormData = {
 };
 
 type Props = {
-  sede?: SedeType;
+  sede?: HotelType;
   onSave: (sedeFormData: FormData) => void;
   isLoading: boolean;
 };

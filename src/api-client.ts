@@ -8,7 +8,6 @@ import {
   HotelType,
   SedeType,
   UserType,
-  //} from "../../backend/src/shared/types";
 } from ".././shared/types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
@@ -76,8 +75,11 @@ export const signIn = async (formData: SignInFormData) => {
 
 export const validateToken = async () => {
   const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
+    method: "GET",
     credentials: "include",
   });
+  
+  console.log(response.body);
 
   if (!response.ok) {
     throw new Error("Token invalid");
