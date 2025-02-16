@@ -47,13 +47,19 @@ const MyHotels = () => {
             whileHover={{ scale: 1.05 }}
           >
             <h2 className="text-gray-600 mt-2">{coworking.name}</h2>
-            <p className="text-gray-500 text-sm mt-1">Direccion: {coworking.tipo_via_principal} {coworking.via_principal} #{coworking.via_secundaria} - {coworking.complemento}</p>
             <p className="text-gray-500 text-sm mt-1">
-              Tipo: {coworking.type}
+              Direccion: {coworking.tipo_via_principal}{" "}
+              {coworking.via_principal} #{coworking.via_secundaria} -{" "}
+              {coworking.complemento}
             </p>
-            <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
-              Ver detalles
-            </button>
+            <p className="text-gray-500 text-sm mt-1">Tipo: {coworking.type}</p>
+            <Link
+              to={`/my-coworkings/get-coworking/${coworking.idsede}`}
+              className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition"
+              style={{ textAlign: "center" }}
+            >
+              Editar sede
+            </Link>
           </motion.div>
         ))}
       </div>

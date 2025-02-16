@@ -6,8 +6,9 @@ import { ResetPasswordFormData } from "./pages/ResetPassword";
 import {
   HotelSearchResponse,
   HotelType,
+  SedeType,
   UserType,
-//} from "../../backend/src/shared/types";
+  //} from "../../backend/src/shared/types";
 } from ".././shared/types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
@@ -113,7 +114,7 @@ export const addMyCoworking = async (sedeFormData: FormData) => {
 export const fetchMyCoworkings = async () => {
   const response = await fetch(`${API_BASE_URL}/api/my-coworkings`, {
     credentials: "include",
-    headers:{
+    headers: {
       Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
     },
   });
@@ -125,30 +126,33 @@ export const fetchMyCoworkings = async () => {
   return response.json();
 };
 
-export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
-  const response = await fetch(`${API_BASE_URL}/api/my-coworkings/${hotelId}`, {
-    credentials: "include",
-  });
-
-  if (!response.ok) {
-    throw new Error("Error fetching Hotels");
-  }
-
-  return response.json();
-};
-
-export const updateMyHotelById = async (hotelFormData: FormData) => {
+export const fetchMyHotelById = async (idsede: string): Promise<SedeType> => {
   const response = await fetch(
-    `${API_BASE_URL}/api/my-coworkings/${hotelFormData.get("hotelId")}`,
+    `${API_BASE_URL}/api/my-coworkings/get-coworking/${idsede}`,
     {
-      method: "PUT",
-      body: hotelFormData,
       credentials: "include",
     }
   );
 
   if (!response.ok) {
-    throw new Error("Failed to update Hotel");
+    throw new Error("Error fetching coworking");
+  }
+
+  return response.json();
+};
+
+export const updateMyHotelById = async (sedeFormData: FormData, idsede: string) => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/my-coworkings/get-coworking/${idsede}`,
+    {
+      method: "PUT",
+      body: sedeFormData,
+      credentials: "include",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Fallo al actualizar coworking");
   }
 
   return response.json();
@@ -238,10 +242,10 @@ export const recoverPassword = async (formData: RecoverPasswordFormData) => {
 
 export const resetPassword = async (formData: ResetPasswordFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/auth/reset-password`, {
-    method: 'POST',
+    method: "POST",
     credentials: "include",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(formData),
   });
@@ -249,7 +253,7 @@ export const resetPassword = async (formData: ResetPasswordFormData) => {
   if (!response.ok) {
     const errorData = await response.json();
     console.log(errorData);
-    throw new Error(errorData.message || 'Something went wrong');
+    throw new Error(errorData.message || "Something went wrong");
   }
 
   return response.json(); // O lo que sea que necesites devolver

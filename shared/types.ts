@@ -8,6 +8,7 @@ export type UserType = {
   
 export type HotelType = {
     _id: number; // Opcional porque es autoincremental
+    idsede: number;
     idEmpresa: number;
     name: string;
     city: string;

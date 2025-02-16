@@ -24,6 +24,7 @@ import { useEffect } from "react";
 }; */
 
 export type SedeFormData = {
+  idsede: number
   name: string;
   city: string;
   country: string;

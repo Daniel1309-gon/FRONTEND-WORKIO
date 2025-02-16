@@ -12,8 +12,8 @@ import SignIn from "./pages/SignIn";
 import HomePage from "./components/HomePage";
 import AddHotel from "./pages/AddHotel";
 import { useAppContext } from "./contexts/AppContext";
-import MyHotels from "./pages/MyHotels";
-//import EditHotel from "./pages/EditHotel";
+import MyHotels from "./pages/MyCoworkings";
+import EditHotel from "./pages/EditCoworking";
 import Search from "./pages/Search";
 import RecoverPassword from "./pages/RecoverPassword";
 import ResetPassword from "./pages/ResetPassword";
@@ -90,14 +90,14 @@ const App = () => {
                 </Layout>
               }
             />
-            {/* <Route
-              path="/edit-coworking/:hotelId"
+            <Route
+              path="/my-coworkings/get-coworking/:idsede"
               element={
                 <Layout>
                   <EditHotel />
                 </Layout>
               }
-            /> */}
+            />
             <Route
               path="/my-coworkings"
               element={

@@ -1,4 +1,4 @@
-import { coworkingFacilities } from "../config/hotel-options-config";
+import { coworkingFacilities } from "../config/coworking-options-config";
 
 type Props = {
   selectedFacilities: string[];
