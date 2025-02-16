@@ -70,7 +70,8 @@ export const signIn = async (formData: SignInFormData) => {
   if (!response.ok) {
     throw new Error(body.message);
   }
-  return body;
+  console.log(body);
+  return await body;
 };
 
 export const validateToken = async () => {
@@ -85,7 +86,7 @@ export const validateToken = async () => {
     throw new Error("Token invalid");
   }
 
-  return response.json();
+  return await response.json();
 };
 
 export const signOut = async () => {
