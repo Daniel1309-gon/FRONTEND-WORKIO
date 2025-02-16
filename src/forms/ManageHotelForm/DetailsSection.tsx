@@ -24,7 +24,7 @@ const DetailsSection = () => {
       </label>
 
       <div className="flex gap-4">
-        <label className="text-gray-700 text-sm font-bold flex-1">
+        {/* <label className="text-gray-700 text-sm font-bold flex-1">
           City
           <input
             type="text"
@@ -34,7 +34,44 @@ const DetailsSection = () => {
           {errors.city && (
             <span className="text-red-500">{errors.city.message}</span>
           )}
+        </label> */}
+
+        <label className="text-gray-700 text-sm font-bold flex-1">
+          Ciudad
+          <select
+            {...register("city", {
+              required: "This field is required",
+            })}
+            className="border rounded w-full p-2 text-gray-700 font-normal"
+          >
+            <option value="">Selecciona una ciudad</option>
+            {[
+              "Bogotá",
+              "Medellín",
+              "Cali",
+              "Barranquilla",
+              "Cartagena",
+              "Bucaramanga",
+              "Pereira",
+              "Santa Marta",
+              "Cúcuta",
+              "Manizales",
+              "Ibagué",
+              "Villavicencio",
+              "Armenia",
+              "Pasto",
+              "Neiva",
+            ].map((city) => (
+              <option key={city} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
+          {errors.city && (
+            <span className="text-red-500">{errors.city.message}</span>
+          )}
         </label>
+
         <label className="text-gray-700 text-sm font-bold flex-1">
           Country
           <input
@@ -122,7 +159,7 @@ const DetailsSection = () => {
         Vía Principal
         <input
           type="text"
-          className="border rounded w-full py-1 px-2 font-normal" 
+          className="border rounded w-full py-1 px-2 font-normal"
           placeholder="Número identificador de la vía"
           {...register("via_principal", { required: "This field is required" })}
         ></input>
