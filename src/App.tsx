@@ -17,6 +17,7 @@ import EditHotel from "./pages/EditCoworking";
 import Search from "./pages/Search";
 import RecoverPassword from "./pages/RecoverPassword";
 import ResetPassword from "./pages/ResetPassword";
+import EditUser from "./pages/EditUser";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -103,6 +104,18 @@ const App = () => {
               element={
                 <Layout>
                   <MyHotels />
+                </Layout>
+              }
+            />
+            <Route
+              path="/edituser"
+              element={
+                <Layout>
+                  <EditUser email={""} user={{
+                  firstName: "",
+                  lastName: "",
+                  password: ""
+                  }} />
                 </Layout>
               }
             />

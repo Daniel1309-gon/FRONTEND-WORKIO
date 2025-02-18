@@ -1,5 +1,6 @@
 import { RegisterFormData } from "./pages/Register";
 import { RegisterFormDataAdmin } from "./pages/RegisterAdmin";
+import { UserFormData } from "./pages/EditUser";
 import { SignInFormData } from "./pages/SignIn";
 import { RecoverPasswordFormData } from "./pages/RecoverPassword";
 import { ResetPasswordFormData } from "./pages/ResetPassword";
@@ -56,6 +57,23 @@ export const registerAdmin = async (formData: RegisterFormDataAdmin) => {
   }
 };
 
+export const updateUser = async (email: string, formData: UserFormData) => {
+  const response = await fetch(`${API_BASE_URL}/api/users/update/${email}`, {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
+
+  if (!response.ok) {
+    throw new Error("Error al actualizar el Usuario");
+  }
+
+  return response.json();
+}
+
 export const signIn = async (formData: SignInFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
     method: "POST",
@@ -79,8 +97,6 @@ export const validateToken = async () => {
     method: "GET",
     credentials: "include",
   });
-  
-  console.log(response.body);
 
   if (!response.ok) {
     throw new Error("Token invalid");
