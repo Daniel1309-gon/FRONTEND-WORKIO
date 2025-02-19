@@ -9,18 +9,36 @@ export type UserType = {
 export type HotelType = {
     _id: number; // Opcional porque es autoincremental
     idsede: number;
-    idEmpresa: number;
+    idempresa: number;
     name: string;
     city: string;
     country: string;
     description: string;
     type: string;
     price_per_day: number;
-    starRating: number;
+    starrating: number;
     facilities: string[];
     asistentes: number;
     visitantes: number;
     image_urls: string[];
+};
+
+export type BookingType = {
+    idreserva: number;
+    idusuario: number;
+    idsede: number;
+    fecha_inicio: string;
+    fecha_fin: string;
+    precio: number;
+    name: string;
+    iddireccion: number;
+    city: string;
+    country: string;
+    image_urls: string[];
+    tipo_via_principal: string;
+    via_principal: string;
+    via_secundaria: string;
+    complemento: string;
 };
 
 export type SedeType = {
@@ -43,18 +61,7 @@ export type SedeType = {
     complemento: string;
 };
 
-export type BookingType = {
-    _id: string;
-    userId: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    adultCount: number;
-    childCount: number;
-    checkIn: Date;
-    checkOut: Date;
-    totalCost: number;
-};
+
 
 export type HotelSearchResponse = {
     data: HotelType[];

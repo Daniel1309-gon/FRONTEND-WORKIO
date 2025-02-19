@@ -9,16 +9,16 @@ const SearchBar = () => {
   const navigate = useNavigate();
   const search = useSearchContext();
 
-  const [destination, setDestination] = useState<string>(search.destination);
+  const [name, setName] = useState<string>(search.name);
   const [checkIn, setCheckIn] = useState<Date>(search.checkIn);
   const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
-  const [adultCount, setAdultCount] = useState<number>(search.adultCount);
-  const [childCount, setChildCount] = useState<number>(search.childCount);
+  const [adultCount, setAdultCount] = useState<number>(search.asistentes);
+  const [childCount, setChildCount] = useState<number>(search.visitantes);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     search.saveSearchValues(
-      destination,
+      name,
       checkIn,
       checkOut,
       adultCount,
@@ -41,8 +41,8 @@ const SearchBar = () => {
         <input
           placeholder="Donde quieres trabajar?"
           className="text-md w-full focus:outline-none"
-          value={destination}
-          onChange={(event) => setDestination(event.target.value)}
+          value={name}
+          onChange={(event) => setName(event.target.value)}
         />
       </div>
 
@@ -54,8 +54,8 @@ const SearchBar = () => {
             type="number"
             min={1}
             max={20}
-            value={adultCount}
-            onChange={(event) => setAdultCount(parseInt(event.target.value))}
+            value={childCount}
+            onChange={(event) => setChildCount(parseInt(event.target.value))}
           />
         </label>
         <label className="items-center flex">
@@ -65,8 +65,8 @@ const SearchBar = () => {
             type="number"
             min={0}
             max={20}
-            value={childCount}
-            onChange={(event) => setChildCount(parseInt(event.target.value))}
+            value={adultCount}
+            onChange={(event) => setAdultCount(parseInt(event.target.value))}
           />
         </label>
       </div>
@@ -79,7 +79,7 @@ const SearchBar = () => {
           endDate={checkOut}
           minDate={minDate}
           maxDate={maxDate}
-          placeholderText="Check-in Date"
+          placeholderText="Fecha de llegada"
           className="min-w-full bg-white p-2 focus:outline-none"
           wrapperClassName="min-w-full"
         />
@@ -93,7 +93,7 @@ const SearchBar = () => {
           endDate={checkOut}
           minDate={minDate}
           maxDate={maxDate}
-          placeholderText="Check-out Date"
+          placeholderText="Fecha de salida"
           className="min-w-full bg-white p-2 focus:outline-none"
           wrapperClassName="min-w-full"
         />
