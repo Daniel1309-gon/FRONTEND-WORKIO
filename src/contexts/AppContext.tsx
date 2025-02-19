@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
 //import { loadStripe, Stripe } from "@stripe/stripe-js";
 import Toast from "../components/Toast";
+import { UserType } from "../../shared/types";
 
 //const STRIPE_PUB_KEY = import.meta.env.VITE_STRIPE_PUB_KEY || "";
 
@@ -14,6 +15,7 @@ type ToastMessage = {
 type AppContext = {
   showToast: (toastMessage: ToastMessage) => void;
   isLoggedIn: boolean;
+  user: UserType | null;
   //stripePromise: Promise<Stripe | null>;
 };
 
@@ -32,6 +34,15 @@ export const AppContextProvider = ({
     retry: false,
   });
 
+  const { data } = useQuery<UserType>(
+    "fetchCurrentUser",
+    apiClient.fetchCurrentUser,
+    {
+      retry: false,
+      staleTime: 1000*60*5,
+    }
+  );
+
   return (
     <AppContext.Provider
       value={{
@@ -39,6 +50,7 @@ export const AppContextProvider = ({
           setToast(toastMessage);
         },
         isLoggedIn: !isError,
+        user: data || null,
       }}
     >
       {toast && (

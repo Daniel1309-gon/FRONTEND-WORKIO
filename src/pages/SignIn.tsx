@@ -52,7 +52,7 @@ const SignIn = () => {
         )}
       </label>
       <label className="text-gray-700 text-sm font-bold flex-1">
-        Contrasena
+        Contraseña
         <input
           type="password"
           className="border rounded w-full py-1 px-2 font-normal"
