@@ -115,6 +115,16 @@ const App = () => {
                 </Layout>
               }
             />
+            <Route
+              path="/bookings"
+              element={
+                
+                <Layout>
+                  <MyBookings />
+                  <EditUser />
+                </Layout>
+              }
+            />
           </>
         )}
         <Route path="*" element={<Navigate to="/" />} />

@@ -1,18 +1,18 @@
 import React, { useContext, useState } from "react";
 
 type SearchContext = {
-  destination: string;
+  name: string;
   checkIn: Date;
   checkOut: Date;
-  adultCount: number;
-  childCount: number;
+  asistentes: number;
+  visitantes: number;
   hotelId: string;
   saveSearchValues: (
-    destination: string,
+    name: string,
     checkIn: Date,
     checkOut: Date,
-    adultCount: number,
-    childCount: number
+    asistentes: number,
+    visitantes: number
   ) => void;
 };
 
@@ -25,8 +25,8 @@ type SearchContextProviderProps = {
 export const SearchContextProvider = ({
   children,
 }: SearchContextProviderProps) => {
-  const [destination, setDestination] = useState<string>(
-    () => sessionStorage.getItem("destination") || ""
+  const [name, setName] = useState<string>(
+    () => sessionStorage.getItem("name") || ""
   );
   const [checkIn, setCheckIn] = useState<Date>(
     () =>
@@ -36,38 +36,38 @@ export const SearchContextProvider = ({
     () =>
       new Date(sessionStorage.getItem("checkOut") || new Date().toISOString())
   );
-  const [adultCount, setAdultCount] = useState<number>(() =>
-    parseInt(sessionStorage.getItem("adultCount") || "1")
+  const [asistentes, setVisitantes] = useState<number>(() =>
+    parseInt(sessionStorage.getItem("asistentes") || "1")
   );
-  const [childCount, setChildCount] = useState<number>(() =>
-    parseInt(sessionStorage.getItem("childCount") || "1")
+  const [visitantes, setAsistentes] = useState<number>(() =>
+    parseInt(sessionStorage.getItem("asistentes") || "1")
   );
   const [hotelId, setHotelId] = useState<string>(
     () => sessionStorage.getItem("hotelID") || ""
   );
 
   const saveSearchValues = (
-    destination: string,
+    name: string,
     checkIn: Date,
     checkOut: Date,
-    adultCount: number,
-    childCount: number,
+    asistentes: number,
+    visitantes: number,
     hotelId?: string
   ) => {
-    setDestination(destination);
+    setName(name);
     setCheckIn(checkIn);
     setCheckOut(checkOut);
-    setAdultCount(adultCount);
-    setChildCount(childCount);
+    setAsistentes(asistentes);
+    setVisitantes(visitantes);
     if (hotelId) {
       setHotelId(hotelId);
     }
 
-    sessionStorage.setItem("destination", destination);
+    sessionStorage.setItem("name", name);
     sessionStorage.setItem("checkIn", checkIn.toISOString());
     sessionStorage.setItem("checkOut", checkOut.toISOString());
-    sessionStorage.setItem("adultCount", adultCount.toString());
-    sessionStorage.setItem("childCount", childCount.toString());
+    sessionStorage.setItem("asistentes", asistentes.toString());
+    sessionStorage.setItem("visitantes", visitantes.toString());
 
     if (hotelId) {
       sessionStorage.setItem("hotelId", hotelId);
@@ -77,11 +77,11 @@ export const SearchContextProvider = ({
   return (
     <SearchContext.Provider
       value={{
-        destination,
+        name,
         checkIn,
         checkOut,
-        adultCount,
-        childCount,
+        asistentes,
+        visitantes,
         hotelId,
         saveSearchValues,
       }}

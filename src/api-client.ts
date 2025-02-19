@@ -5,8 +5,8 @@ import { SignInFormData } from "./pages/SignIn";
 import { RecoverPasswordFormData } from "./pages/RecoverPassword";
 import { ResetPasswordFormData } from "./pages/ResetPassword";
 import {
+  BookingType,
   HotelSearchResponse,
-  HotelType,
   SedeType,
   UserType,
 } from ".././shared/types";
@@ -75,22 +75,30 @@ export const updateUser = async (email: string, formData: UserFormData) => {
 }
 
 export const signIn = async (formData: SignInFormData) => {
-  const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  });
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-  const body = await response.json();
-  if (!response.ok) {
-    throw new Error(body.message);
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Error al iniciar sesión");
+    }
+
+    
+    return data;
+  } catch (error) {
+    console.error("Error en signIn:", error);
+    throw error;
   }
-  console.log(body);
-  return await body;
 };
+
 
 export const validateToken = async () => {
   const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
@@ -160,7 +168,10 @@ export const fetchMyHotelById = async (idsede: string): Promise<SedeType> => {
   return response.json();
 };
 
-export const updateMyHotelById = async (sedeFormData: FormData, idsede: string) => {
+export const updateMyHotelById = async (
+  sedeFormData: FormData,
+  idsede: string
+) => {
   const response = await fetch(
     `${API_BASE_URL}/api/my-coworkings/get-coworking/${idsede}`,
     {
@@ -178,11 +189,11 @@ export const updateMyHotelById = async (sedeFormData: FormData, idsede: string) 
 };
 
 export type SearchParams = {
-  destination?: string;
+  name?: string;
   checkIn?: string;
   checkOut?: string;
-  adultCount?: string;
-  childCount?: string;
+  asistentes?: string;
+  visitantes?: string;
   page?: string;
   facilities?: string[];
   types?: string[];
@@ -195,11 +206,11 @@ export const searchHotels = async (
   searchParams: SearchParams
 ): Promise<HotelSearchResponse> => {
   const queryParams = new URLSearchParams();
-  queryParams.append("destination", searchParams.destination || "");
+  queryParams.append("destination", searchParams.name || "");
   queryParams.append("checkIn", searchParams.checkIn || "");
   queryParams.append("checkOut", searchParams.checkOut || "");
-  queryParams.append("adultCount", searchParams.adultCount || "");
-  queryParams.append("childCount", searchParams.childCount || "");
+  queryParams.append("adultCount", searchParams.asistentes || "");
+  queryParams.append("childCount", searchParams.visitantes || "");
   queryParams.append("page", searchParams.page || "");
 
   queryParams.append("maxPrice", searchParams.maxPrice || "");
@@ -223,19 +234,27 @@ export const searchHotels = async (
   return response.json();
 };
 
-export const fetchHotels = async (): Promise<HotelType[]> => {
-  const response = await fetch(`${API_BASE_URL}/api/hotels`);
+
+export const fetchSedeDetails = async (idsede: string) => {
+  const response = await fetch(`${API_BASE_URL}/api/coworkings/${idsede}`); // Endpoint del backend
   if (!response.ok) {
-    throw new Error("Error fetching hotels");
+    throw new Error("Error fetching coworking");
   }
   return response.json();
 };
+export const fetchMyBookings = async (): Promise<BookingType[]> => {
+  const response = await fetch(`${API_BASE_URL}/api/bookings`, {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
-  const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}`);
+  
   if (!response.ok) {
-    throw new Error("Error fetching Hotels");
+    throw new Error("Error al obtener las reservas");
   }
+  
 
   return response.json();
 };

@@ -19,11 +19,11 @@ const Search = () => {
   const [sortOption, setSortOption] = useState<string>("");
 
   const searchParams = {
-    destination: search.destination,
+    name: search.name,
     checkIn: search.checkIn.toISOString(),
     checkOut: search.checkOut.toISOString(),
-    adultCount: search.adultCount.toString(),
-    childCount: search.childCount.toString(),
+    asistentes: search.asistentes.toString(),
+    visitantes: search.visitantes.toString(),
     page: page.toString(),
     stars: selectedStars,
     types: selectedHotelTypes,
@@ -97,7 +97,7 @@ const Search = () => {
         <div className="flex justify-between items-center">
           <span className="text-xl font-bold">
             {hotelData?.pagination.total} Coworkings encontrados
-            {search.destination ? ` in ${search.destination}` : ""}
+            {search.name ? ` in ${search.name}` : ""}
           </span>
           <select
             value={sortOption}
