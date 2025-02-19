@@ -23,7 +23,7 @@ import MyCoworkings from "./pages/MyCoworkings";
 const App = () => {
   const { isLoggedIn } = useAppContext();
   return (
-    <Router>
+    <Router basename="/">
       <Routes>
         <Route
           path="/"
