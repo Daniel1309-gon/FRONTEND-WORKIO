@@ -121,17 +121,14 @@ const App = () => {
               path="/edituser"
               element={
                 <Layout>
-                  <EditUser email={""} user={{
-                  firstName: "",
-                  lastName: "",
-                  password: ""
-                  }} />
+                  <EditUser />
                 </Layout>
               }
             />
             <Route
               path="/bookings"
               element={
+                
                 <Layout>
                   <MyBookings />
                 </Layout>
