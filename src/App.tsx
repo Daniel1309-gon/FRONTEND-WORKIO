@@ -121,7 +121,6 @@ const App = () => {
                 
                 <Layout>
                   <MyBookings />
-                  <EditUser />
                 </Layout>
               }
             />
