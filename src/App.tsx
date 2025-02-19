@@ -111,11 +111,7 @@ const App = () => {
               path="/edituser"
               element={
                 <Layout>
-                  <EditUser email={""} user={{
-                  firstName: "",
-                  lastName: "",
-                  password: ""
-                  }} />
+                  <EditUser />
                 </Layout>
               }
             />
