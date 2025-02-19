@@ -75,22 +75,30 @@ export const updateUser = async (email: string, formData: UserFormData) => {
 }
 
 export const signIn = async (formData: SignInFormData) => {
-  const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  });
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-  const body = await response.json();
-  if (!response.ok) {
-    throw new Error(body.message);
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Error al iniciar sesión");
+    }
+
+    
+    return data;
+  } catch (error) {
+    console.error("Error en signIn:", error);
+    throw error;
   }
-  console.log(body);
-  return await body;
 };
+
 
 export const validateToken = async () => {
   const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {

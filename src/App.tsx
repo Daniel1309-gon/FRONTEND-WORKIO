@@ -24,7 +24,7 @@ import EditUser from "./pages/EditUser";
 const App = () => {
   const { isLoggedIn } = useAppContext();
   return (
-    <Router>
+    <Router basename="/">
       <Routes>
         <Route
           path="/"
