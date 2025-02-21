@@ -4,6 +4,7 @@ export type UserType = {
     password: string;
     nombre: string;
     apellido: string;
+    role: string;
 };
   
 export type HotelType = {

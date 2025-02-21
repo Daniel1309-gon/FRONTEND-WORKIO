@@ -1,11 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
-//import { loadStripe, Stripe } from "@stripe/stripe-js";
 import Toast from "../components/Toast";
 import { UserType } from "../../shared/types";
-
-//const STRIPE_PUB_KEY = import.meta.env.VITE_STRIPE_PUB_KEY || "";
 
 type ToastMessage = {
   message: string;
@@ -16,19 +13,14 @@ type AppContext = {
   showToast: (toastMessage: ToastMessage) => void;
   isLoggedIn: boolean;
   user: UserType | null;
-  //stripePromise: Promise<Stripe | null>;
+  clearUser: () => void;
 };
 
 const AppContext = React.createContext<AppContext | undefined>(undefined);
 
-//const stripePromise = loadStripe(STRIPE_PUB_KEY);
-
-export const AppContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
+  const [user, setUser] = useState<UserType | null>(null);
 
   const { isError } = useQuery("validateToken", apiClient.validateToken, {
     retry: false,
@@ -39,9 +31,16 @@ export const AppContextProvider = ({
     apiClient.fetchCurrentUser,
     {
       retry: false,
-      staleTime: 1000*60*5,
+      staleTime: 1000 * 60 * 5,
     }
   );
+
+  // 🔥 Actualiza `user` cuando `data` cambia
+  useEffect(() => {
+    if (data) {
+      setUser(data);
+    }
+  }, [data]);
 
   return (
     <AppContext.Provider
@@ -50,7 +49,8 @@ export const AppContextProvider = ({
           setToast(toastMessage);
         },
         isLoggedIn: !isError,
-        user: data || null,
+        user,
+        clearUser: () => setUser(null),
       }}
     >
       {toast && (

@@ -26,6 +26,7 @@ const SignIn = () => {
     onSuccess: async () => {
       showToast({ message: "Sign in Successful!", type: "SUCCESS" });
       await queryClient.invalidateQueries("validateToken");
+      await queryClient.refetchQueries("fetchCurrentUser");
       navigate(location.state?.from?.pathname || "/");
     },
     onError: (error: Error) => {
