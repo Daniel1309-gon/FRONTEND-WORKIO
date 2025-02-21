@@ -2,7 +2,7 @@ const PrivacyPolicy = () => {
     return (
       <>
         <h2 className="font-bold font-raleway text-2xl">
-          Política de Privacidad
+          Política de privacidad
         </h2>
         <p>
           Esta página le informa sobre nuestras políticas respecto a la
@@ -11,7 +11,7 @@ const PrivacyPolicy = () => {
           datos.
         </p>
         <br />
-        <strong>Recopilación y Uso de la Información</strong>
+        <strong>Recopilación y uso de la información</strong>
         <br />
         <p>
           No recopilamos ningún tipo de información personal identificable sobre

@@ -188,6 +188,17 @@ export const updateMyHotelById = async (
   return response.json();
 };
 
+export const deleteCoworking = async (idsede: string) => {
+  const response = await fetch(`${API_BASE_URL}/api/my-coworkings/${idsede}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error deleting coworking");
+  }
+};
+
 export type SearchParams = {
   name?: string;
   checkIn?: string;
