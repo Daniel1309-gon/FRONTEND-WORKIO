@@ -9,16 +9,16 @@ const SearchBar = () => {
   const navigate = useNavigate();
   const search = useSearchContext();
 
-  const [destination, setDestination] = useState<string>(search.destination);
+  const [name, setName] = useState<string>(search.name);
   const [checkIn, setCheckIn] = useState<Date>(search.checkIn);
   const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
-  const [adultCount, setAdultCount] = useState<number>(search.adultCount);
-  const [childCount, setChildCount] = useState<number>(search.childCount);
+  const [adultCount, setAdultCount] = useState<number>(search.asistentes);
+  const [childCount, setChildCount] = useState<number>(search.visitantes);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     search.saveSearchValues(
-      destination,
+      name,
       checkIn,
       checkOut,
       adultCount,
@@ -33,21 +33,21 @@ const SearchBar = () => {
 
   return (
     <form
-  onSubmit={handleSubmit}
-  style={{ backgroundColor: "#af9efe" }}
-  className="-mt-8 p-3 rounded shadow-md grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4"
->
-      <div className="flex flex-row items-center flex-1 bg-white p-2">
+      onSubmit={handleSubmit}
+      style={{ backgroundColor: "#af9efe" }}
+      className="-mt-8 p-3 rounded shadow-md grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4"
+    >
+      <div className="flex flex-row items-center flex-1 bg-white p-2 rounded-lg">
         <MdTravelExplore size={25} className="mr-2" />
         <input
           placeholder="Donde quieres trabajar?"
           className="text-md w-full focus:outline-none"
-          value={destination}
-          onChange={(event) => setDestination(event.target.value)}
+          value={name}
+          onChange={(event) => setName(event.target.value)}
         />
       </div>
 
-      <div className="flex bg-white px-2 py-1 gap-2">
+      <div className="flex bg-white px-2 py-1 gap-2 rounded-lg">
         <label className="items-center flex">
           Asisten:
           <input
@@ -55,8 +55,8 @@ const SearchBar = () => {
             type="number"
             min={1}
             max={20}
-            value={adultCount}
-            onChange={(event) => setAdultCount(parseInt(event.target.value))}
+            value={childCount}
+            onChange={(event) => setChildCount(parseInt(event.target.value))}
           />
         </label>
         <label className="items-center flex">
@@ -66,8 +66,8 @@ const SearchBar = () => {
             type="number"
             min={0}
             max={20}
-            value={childCount}
-            onChange={(event) => setChildCount(parseInt(event.target.value))}
+            value={adultCount}
+            onChange={(event) => setAdultCount(parseInt(event.target.value))}
           />
         </label>
       </div>
@@ -80,8 +80,8 @@ const SearchBar = () => {
           endDate={checkOut}
           minDate={minDate}
           maxDate={maxDate}
-          placeholderText="Check-in Date"
-          className="min-w-full bg-white p-2 focus:outline-none"
+          placeholderText="Fecha de llegada"
+          className="min-w-full bg-white p-2 focus:outline-none rounded-lg"
           wrapperClassName="min-w-full"
         />
       </div>
@@ -94,16 +94,16 @@ const SearchBar = () => {
           endDate={checkOut}
           minDate={minDate}
           maxDate={maxDate}
-          placeholderText="Check-out Date"
-          className="min-w-full bg-white p-2 focus:outline-none"
+          placeholderText="Fecha de salida"
+          className="min-w-full bg-white p-2 focus:outline-none rounded-lg"
           wrapperClassName="min-w-full"
         />
       </div>
       <div className="flex gap-1">
-        <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500">
+        <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500 rounded-lg">
           Buscar
         </button>
-        <button className="w-1/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500">
+        <button className="w-1/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500 rounded-lg">
           Clear
         </button>
       </div>
