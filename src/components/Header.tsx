@@ -10,7 +10,7 @@ const Header = () => {
     <div className="bg-rose-500 py-6">
       <div className="container mx-auto flex justify-between">
         <span className="text-3xl text-white font-bold tracking-tight flex items-center">
-          <img src="src/components/logo.svg" alt="Logo" className="w-8 h-8 mr-2"/>
+          <img src="/logo.svg" alt="Logo" className="w-8 h-8 mr-2"/>
           <Link to="/">Workio</Link>
         </span>
         <span className="flex space-x-2">
