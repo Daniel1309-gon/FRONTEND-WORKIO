@@ -7,6 +7,7 @@ export type UserFormData = {
     firstName: string;
     lastName: string;
     password: string;
+    confirmPassword: string;
 };
 
 const EditUser = () => {
@@ -18,6 +19,7 @@ const EditUser = () => {
         register,
         handleSubmit,
         formState: { errors },
+        setError,
     } = useForm<UserFormData>();
 
     const mutation = useMutation(
@@ -39,6 +41,13 @@ const EditUser = () => {
     );
 
     const onSubmit = handleSubmit((data) => {
+        if (data.password !== data.confirmPassword) {
+            setError("confirmPassword", {
+                type: "manual",
+                message: "Las contraseñas no coinciden",
+            });
+            return;
+        };
         mutation.mutate(data);
     });
 
@@ -82,6 +91,20 @@ const EditUser = () => {
                         })} />
                         {errors.password && (
                             <span className="text-red-500">{errors.password.message}</span>
+                        )}
+                    </label>
+                </div>
+                <div className="flex p-5 gap-2">
+                    <label className="text-gray-700 text-sm font-bold flex-1">
+                        Confirmar Contraseña
+                        <input
+                        className="border rounded w-full py-1 px-2 font-normal"
+                        type="password"
+                        {...register("confirmPassword", {
+                            required: "La confirmación de contraseña es obligatoria",
+                        })} />
+                        {errors.confirmPassword && (
+                            <span className="text-red-500">{errors.confirmPassword.message}</span>
                         )}
                     </label>
                 </div>

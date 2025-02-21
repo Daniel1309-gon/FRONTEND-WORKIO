@@ -10,16 +10,15 @@ import Register from "./pages/Register";
 import RegisterAdmin from "./pages/RegisterAdmin";
 import SignIn from "./pages/SignIn";
 import HomePage from "./components/HomePage";
-import AddHotel from "./pages/AddCoworking";
+import AddCoworking from "./pages/AddCoworking";
 import { useAppContext } from "./contexts/AppContext";
 import MyHotels from "./pages/MyCoworkings";
 import EditHotel from "./pages/EditCoworking";
 import Search from "./pages/Search";
 import RecoverPassword from "./pages/RecoverPassword";
 import ResetPassword from "./pages/ResetPassword";
-import DetailPage from "./pages/DetailPage";
-import MyBookings from "./pages/MyBookings";
 import EditUser from "./pages/EditUser";
+import MyCoworkings from "./pages/MyCoworkings";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -82,14 +81,6 @@ const App = () => {
             </Layout>
           }
         />
-        <Route
-          path="/coworkings/:idsede"
-          element={
-            <Layout>
-              <DetailPage />
-            </Layout>
-          }
-        />
 
         {isLoggedIn && (
           <>
@@ -97,7 +88,7 @@ const App = () => {
               path="/add-coworking"
               element={
                 <Layout>
-                  <AddHotel />
+                  <AddCoworking />
                 </Layout>
               }
             />
@@ -126,11 +117,10 @@ const App = () => {
               }
             />
             <Route
-              path="/bookings"
+              path="/coworkings"
               element={
-                
                 <Layout>
-                  <MyBookings />
+                  <MyCoworkings />
                 </Layout>
               }
             />

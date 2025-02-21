@@ -66,8 +66,6 @@ export type SedeType = {
     complemento: string;
 };
 
-
-
 export type HotelSearchResponse = {
     data: HotelType[];
     pagination: {
