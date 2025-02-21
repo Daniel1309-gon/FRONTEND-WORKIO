@@ -103,8 +103,9 @@ const HomePage = () => {
             />
             <h3 className="text-xl font-bold">Contacto</h3>
             <p className="text-left mt-2">
-              - Email: equipoworkio@gmail.com
-              <br />- Teléfono: +57 123 456 789
+              - <strong>Email:</strong> equipoworkio@gmail.com
+              <br />- <strong>Soporte:</strong> jujaimesc@unal.edu.co
+              <br />- <strong>Teléfono:</strong> +57 313 805 2999
             </p>
           </div>
         </div>
