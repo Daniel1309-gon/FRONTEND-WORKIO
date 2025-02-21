@@ -106,8 +106,8 @@ const SearchBar = () => {
         <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500 rounded-lg">
           Buscar
         </button>
-        <button className="w-1/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500 rounded-lg">
-          Clear
+        <button className="w-1/3 bg-[#f06824] text-white h-full p-2 font-bold text-xl hover:bg-[#f06824]/90 rounded-lg">
+        🗑️
         </button>
       </div>
     </form>
