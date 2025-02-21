@@ -4,6 +4,7 @@ import { MdTravelExplore } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
+import { es } from "date-fns/locale/es";
 
 const SearchBar = () => {
   const navigate = useNavigate();
@@ -81,6 +82,7 @@ const SearchBar = () => {
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="Fecha de llegada"
+          locale={es}
           className="min-w-full bg-white p-2 focus:outline-none"
           wrapperClassName="min-w-full"
         />
@@ -95,6 +97,7 @@ const SearchBar = () => {
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="Fecha de salida"
+          locale={es}
           className="min-w-full bg-white p-2 focus:outline-none"
           wrapperClassName="min-w-full"
         />
@@ -103,8 +106,8 @@ const SearchBar = () => {
         <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500 rounded-lg">
           Buscar
         </button>
-        <button className="w-1/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500 rounded-lg">
-          Clear
+        <button className="w-1/3 bg-[#f06824] text-white h-full p-2 font-bold text-xl hover:bg-[#f09567]/90 rounded-lg">
+        🗑️
         </button>
       </div>
     </form>
