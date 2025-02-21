@@ -5,9 +5,10 @@ import { useState } from "react";
 import SearchResultsCard from "../components/SearchResultsCard";
 import Pagination from "../components/Pagination";
 import StarRatingFilter from "../components/StarRatingFilter";
-import HotelTypesFilter from "../components/HotelTypesFilter";
+import HotelTypesFilter from "../components/SedeTypeFilter";
 import FacilitiesFilter from "../components/FacilitiesFilter";
 import PriceFilter from "../components/PriceFilter";
+import { FiFilter } from "react-icons/fi"; // Icono para filtros
 
 const Search = () => {
   const search = useSearchContext();
@@ -68,9 +69,40 @@ const Search = () => {
     );
   };
 
+
+  const [showFilters, setShowFilters] = useState(false);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
-      <div className="rounded-lg border border-slate-300 p-5 h-fit sticky top-10">
+      <button
+      className="lg:hidden flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md"
+      onClick={() => setShowFilters(!showFilters)}
+    >
+      <FiFilter />
+      Filtrar
+    </button>
+
+    {/* Sidebar de filtros */}
+    <div
+      className={`${
+        showFilters ? "block" : "hidden"
+      } lg:block absolute lg:relative top-0 left-0 bg-white p-5 w-full lg:w-auto h-screen lg:h-auto z-50 shadow-lg lg:shadow-none border border-slate-300 rounded-lg`}
+    >
+      <button
+        className="lg:hidden mb-4 text-red-500"
+        onClick={() => setShowFilters(false)}
+      >
+        Cerrar filtros
+      </button>
+      <h3 className="text-lg font-semibold border-b border-slate-300 pb-5">
+        Filtrar por:
+      </h3>
+      <StarRatingFilter selectedStars={selectedStars} onChange={handleStarsChange} />
+      <HotelTypesFilter selectedHotelTypes={selectedHotelTypes} onChange={handleHotelTypeChange} />
+      <FacilitiesFilter selectedFacilities={selectedFacilities} onChange={handleFacilityChange} />
+      <PriceFilter selectedPrice={selectedPrice} onChange={(value) => setSelectedPrice(value)} />
+    </div>
+      {/* <div className="rounded-lg border border-slate-300 p-5 h-fit sticky top-10">
         <div className="space-y-5">
           <h3 className="text-lg font-semibold border-b border-slate-300 pb-5">
             Filtrar por:
@@ -92,7 +124,9 @@ const Search = () => {
             onChange={(value?: number) => setSelectedPrice(value)}
           />
         </div>
-      </div>
+      </div> */}
+
+
       <div className="flex flex-col gap-5">
         <div className="flex justify-between items-center">
           <span className="text-xl font-bold">

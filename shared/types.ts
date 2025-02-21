@@ -21,6 +21,11 @@ export type HotelType = {
     asistentes: number;
     visitantes: number;
     image_urls: string[];
+    iddireccion: number;
+    tipo_via_principal: string;
+    via_principal: string;
+    via_secundaria: string;
+    complemento: string;
 };
 
 export type BookingType = {

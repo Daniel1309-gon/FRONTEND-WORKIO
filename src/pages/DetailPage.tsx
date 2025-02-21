@@ -25,7 +25,6 @@ const DetailPage = () => {
   };
 
   useEffect(() => {
-    // Fetch the hotel details using the ID from the URL
     const fetchHotelDetails = async () => {
       try {
         const response = await fetch(
@@ -50,7 +49,8 @@ const DetailPage = () => {
 
   const handleReserve = async () => {
     if (!startDate || !endDate || !hotel) return;
-    const subtotalPrice = getDaysDifference(startDate, endDate) * hotel.price_per_day;
+    const subtotalPrice =
+      getDaysDifference(startDate, endDate) * hotel.price_per_day;
     const totalPrice = subtotalPrice * 1.1; // Añade un 10% PARA Workio
     const reservationData = {
       idsede: idsede,
@@ -62,17 +62,16 @@ const DetailPage = () => {
       imgUrl: hotel.image_urls[0],
       idempresa: hotel.idempresa,
     };
-  
+
     console.log("reservationData", reservationData);
     try {
       const response = await fetch(`${API_BASE_URL}/api/payment/create-order`, {
         method: "POST",
-        headers: { "Content-Type": "application/json",
-         },
-         credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(reservationData),
       });
-  
+
       const data = await response.json();
       if (data.url) {
         window.location.href = data.url; // Redirige a MercadoPago
@@ -83,99 +82,118 @@ const DetailPage = () => {
       console.error("Error creando la orden de pago:", error);
     }
   };
-  
 
   return (
-    <div className="p-8">
+    <div className="p-6 lg:p-10 bg-white shadow-lg rounded-lg">
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-8">
-        {/* <div className="w-full h-[300px]">
-          <img
-            src={hotel.image_urls[0]}
-            alt={`Imagen de ${hotel.name}`}
-            className="w-full h-full object-cover object-center"
-          />
-        </div> */}
+        {/* Carrusel de imágenes */}
         <ImageCarousel imageUrls={hotel.image_urls} />
 
-        <div>
-          <h1 className="text-3xl font-bold">{hotel.name}</h1>
+        {/* Información del hotel */}
+        <div className="space-y-4">
+          <h1 className="text-4xl font-bold text-gray-900">{hotel.name}</h1>
+
+          {/* Estrellas y tipo de hotel */}
           {hotel.starrating > 0 && (
-            <div className="flex items-center mt-2">
+            <div className="flex items-center gap-2">
               <span className="flex">
                 {Array.from({ length: hotel.starrating }).map((_, index) => (
-                  <AiFillStar key={index} className="fill-yellow-400" />
+                  <AiFillStar key={index} className="fill-yellow-400 text-xl" />
                 ))}
               </span>
-              <span className="ml-2 text-sm">{hotel.type}</span>
+              <span className="text-gray-600 text-sm">{hotel.type}</span>
             </div>
           )}
-          <p className="mt-4">{hotel.description}</p>
 
-          <div className="mt-4">
-            <h3 className="font-bold">Instalaciones:</h3>
-            <ul>
+          {/* Descripción */}
+          <p className="text-gray-700 leading-relaxed">{hotel.description}</p>
+
+          {/* Instalaciones */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800">
+              Instalaciones:
+            </h3>
+            <ul className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-2">
               {hotel.facilities.map((facility, index) => (
-                <li key={index}>{facility}</li>
+                <li
+                  key={index}
+                  className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium"
+                >
+                  {facility}
+                </li>
               ))}
             </ul>
           </div>
 
-          <div className="mt-6">
-            <h3 className="font-bold">
-              Subtotal por día: ${hotel.price_per_day}
-              <br />
-              Total por día: ${hotel.price_per_day*1.1}
-            </h3>
+          {/* Precios */}
+          <div className="p-4 bg-gray-100 rounded-lg">
+            <h3 className="text-lg font-bold text-gray-800">Precios:</h3>
+            <p className="text-gray-700">
+              <span className="font-semibold">Subtotal por día:</span> $
+              {hotel.price_per_day}
+            </p>
+            <p className="text-gray-700">
+              <span className="font-semibold">
+                Total por día (con impuestos):
+              </span>{" "}
+              ${hotel.price_per_day * 1.1}
+            </p>
           </div>
 
-          <div className="mt-6">
-            <h2 className="text-xl font-semibold">
+          {/* Selección de fechas */}
+          <div>
+            <h2 className="text-xl font-semibold text-gray-800">
               Selecciona las fechas de tu reserva
             </h2>
             <div className="flex flex-col sm:flex-row gap-4 mt-2">
               <div>
-                <label className="block font-medium">Desde:</label>
+                <label className="block font-medium text-gray-700">
+                  Desde:
+                </label>
                 <DatePicker
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
                   selectsStart
                   startDate={startDate}
                   endDate={endDate}
-                  minDate={new Date()} // No permite fechas pasadas
+                  minDate={new Date()}
                   dateFormat="dd/MM/yyyy"
-                  className="border p-2 rounded-lg"
+                  className="border p-2 rounded-lg w-full"
                 />
               </div>
               <div>
-                <label className="block font-medium">Hasta:</label>
+                <label className="block font-medium text-gray-700">
+                  Hasta:
+                </label>
                 <DatePicker
                   selected={endDate}
                   onChange={(date) => setEndDate(date)}
                   selectsEnd
                   startDate={startDate}
                   endDate={endDate}
-                  minDate={startDate || new Date()} // La fecha final debe ser mayor que la inicial
+                  minDate={startDate || new Date()}
                   dateFormat="dd/MM/yyyy"
-                  className="border p-2 rounded-lg"
+                  className="border p-2 rounded-lg w-full"
                 />
               </div>
             </div>
           </div>
 
-          <div className="mt-4">
-            {startDate && endDate && (
-              <p className="text-lg">
+          {/* Días seleccionados */}
+          {startDate && endDate && (
+            <div className="p-3 bg-blue-50 rounded-lg">
+              <p className="text-blue-700 font-semibold">
                 <strong>Días seleccionados:</strong>{" "}
                 {getDaysDifference(startDate, endDate)}
               </p>
-            )}
-          </div>
+            </div>
+          )}
 
-          {/* Aquí agregamos el botón de MercadoPago */}
-          <div className="mt-6">
+          {/* Botón de reserva */}
+          <div className="mt-4">
             <button
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-lg hover:bg-blue-500"
-              disabled={!startDate || !endDate} // Deshabilita si no se seleccionaron fechas
+              className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-bold text-lg hover:bg-blue-500 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={!startDate || !endDate}
               onClick={handleReserve}
             >
               Reservar con MercadoPago
