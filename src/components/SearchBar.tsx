@@ -18,14 +18,16 @@ const SearchBar = () => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    search.saveSearchValues(
-      name,
-      checkIn,
-      checkOut,
-      adultCount,
-      childCount
-    );
+    search.saveSearchValues(name, checkIn, checkOut, adultCount, childCount);
     navigate("/search");
+  };
+
+  const handleClear = () => {
+    setName(""); // Restablece el nombre a vacío
+    setCheckIn(new Date()); // Restablece la fecha de llegada a la fecha actual
+    setCheckOut(new Date()); // Restablece la fecha de salida a la fecha actual
+    setAdultCount(1); // Restablece el número de adultos a 1
+    setChildCount(1); // Restablece el número de niños a 0
   };
 
   const minDate = new Date();
@@ -106,8 +108,11 @@ const SearchBar = () => {
         <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500 rounded-lg">
           Buscar
         </button>
-        <button className="w-1/3 bg-[#f06824] text-white h-full p-2 font-bold text-xl hover:bg-[#f09567]/90 rounded-lg">
-        🗑️
+        <button
+          className="w-1/3 bg-[#f06824] text-white h-full p-2 font-bold text-xl hover:bg-[#f09567]/90 rounded-lg"
+          onClick={handleClear}
+        >
+          🗑️
         </button>
       </div>
     </form>
