@@ -19,7 +19,8 @@ const Footer = () => {
     return (
       <div className="bg-rose-500 py-10">
         <div className="container mx-auto flex justify-between items-center">
-          <span className="text-3xl text-white font-bold tracking-tight">
+          <span className="text-3xl text-white font-bold tracking-tight flex" >
+          <img src="/logo.svg" alt="Logo" className="w-8 h-8 mr-2"/>
             Workio
           </span>
           <span className="text-white font-bold tracking-tight flex gap-4">
