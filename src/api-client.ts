@@ -187,7 +187,18 @@ export const getOfficeTypesBySede = async (idsede: number) => {
   }
 };
 
+export const updateOfficeAvailability = async (idFacilidad: number, disponibilidad: boolean) => {
+  const response = await fetch(`${API_BASE_URL}/api/coworkings/office-types/${idFacilidad}/availability`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ disponibilidad }),
+  });
 
+  if (!response.ok) {
+    throw new Error("Error al actualizar la disponibilidad");
+  }
+  return response.json();
+};
 
 
 export const createOfficeType = async (idsede: number, officeType: {
@@ -261,11 +272,11 @@ export const searchHotels = async (
   searchParams: SearchParams
 ): Promise<HotelSearchResponse> => {
   const queryParams = new URLSearchParams();
-  queryParams.append("destination", searchParams.name || "");
+  queryParams.append("name", searchParams.name || "");
   queryParams.append("checkIn", searchParams.checkIn || "");
   queryParams.append("checkOut", searchParams.checkOut || "");
-  queryParams.append("adultCount", searchParams.asistentes || "");
-  queryParams.append("childCount", searchParams.visitantes || "");
+  queryParams.append("asistentes", searchParams.asistentes || "");
+  queryParams.append("visitantes", searchParams.visitantes || "");
   queryParams.append("page", searchParams.page || "");
 
   queryParams.append("maxPrice", searchParams.maxPrice || "");
