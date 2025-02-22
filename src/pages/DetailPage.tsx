@@ -23,9 +23,14 @@ const DetailPage = () => {
     const diffInMs = end.getTime() - start.getTime(); // Resta los timestamps
     return Math.ceil(diffInMs / (1000 * 60 * 60 * 24)); // Convierte de milisegundos a días
   };
-
+  
+  const roundToNearest500 = (number: number): number => {
+    return Math.ceil(number / 500) * 500;
+  };
   useEffect(() => {
     const fetchHotelDetails = async () => {
+
+
       try {
         const response = await fetch(
           `${API_BASE_URL}/api/coworkings/${idsede}`
@@ -50,8 +55,8 @@ const DetailPage = () => {
   const handleReserve = async () => {
     if (!startDate || !endDate || !hotel) return;
     const subtotalPrice =
-      getDaysDifference(startDate, endDate) * hotel.price_per_day;
-    const totalPrice = subtotalPrice * 1.1; // Añade un 10% PARA Workio
+      getDaysDifference(startDate, endDate) * hotel.price_per_day * 1.15 / 0.9406;
+    const totalPrice = roundToNearest500(subtotalPrice); // Añade un 15% PARA Workio
     const reservationData = {
       idsede: idsede,
       startDate: startDate.toISOString().split("T")[0], // Formato YYYY-MM-DD
@@ -62,6 +67,8 @@ const DetailPage = () => {
       imgUrl: hotel.image_urls[0],
       idempresa: hotel.idempresa,
     };
+
+    alert(totalPrice);
 
     console.log("reservationData", reservationData);
     try {
@@ -134,9 +141,9 @@ const DetailPage = () => {
             </p>
             <p className="text-gray-700">
               <span className="font-semibold">
-                Total por día (con impuestos):
+                Total por día (con impuestos y comisión de pasarela):
               </span>{" "}
-              ${hotel.price_per_day * 1.1}
+              ${roundToNearest500(hotel.price_per_day * 1.15 /0.9406)}
             </p>
           </div>
 
