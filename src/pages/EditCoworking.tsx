@@ -1,11 +1,12 @@
 import { useMutation, useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as apiClient from "../api-client";
 import ManageHotelForm from "../forms/ManageHotelForm/ManageHotelForm";
 import { useAppContext } from "../contexts/AppContext";
 import { SedeType } from "../../shared/types"; // Asegúrate de definir esta interfaz
 
 const EditHotel = () => {
+  const navigate = useNavigate();
   const { idsede } = useParams<{ idsede: string }>();
   const { showToast } = useAppContext();
 
@@ -23,6 +24,7 @@ const EditHotel = () => {
     {
       onSuccess: () => {
         showToast({ message: "Coworking guardado!", type: "SUCCESS" });
+        navigate('/');
       },
       onError: () => {
         showToast({ message: "Error editando coworking", type: "ERROR" });

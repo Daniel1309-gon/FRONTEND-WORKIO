@@ -24,7 +24,7 @@ const SignIn = () => {
 
   const mutation = useMutation(apiClient.signIn, {
     onSuccess: async () => {
-      showToast({ message: "Sign in Successful!", type: "SUCCESS" });
+      showToast({ message: "Bienvenido!", type: "SUCCESS" });
       await queryClient.invalidateQueries("validateToken");
       await queryClient.refetchQueries("fetchCurrentUser");
       navigate(location.state?.from?.pathname || "/");
@@ -46,7 +46,7 @@ const SignIn = () => {
         <input
           type="email"
           className="border rounded w-full py-1 px-2 font-normal"
-          {...register("email", { required: "This field is required" })}
+          {...register("email", { required: "Este campo es obligatorio" })}
         ></input>
         {errors.email && (
           <span className="text-red-500">{errors.email.message}</span>
@@ -58,10 +58,10 @@ const SignIn = () => {
           type="password"
           className="border rounded w-full py-1 px-2 font-normal"
           {...register("password", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
             minLength: {
               value: 6,
-              message: "Password must be at least 6 characters",
+              message: "La contraseña es de al menos 6 caracteres.",
             },
           })}
         ></input>
@@ -83,7 +83,7 @@ const SignIn = () => {
           type="submit"
           className="bg-rose-400 text-white p-2 font-bold hover:bg-rose-400 text-xl"
         >
-          Iniciar Sesion
+          Iniciar Sesión
         </button>
       </span>
     </form>

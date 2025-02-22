@@ -40,7 +40,7 @@ const EditUser = () => {
     const mutation = useMutation(
         (data: UserFormData) => {
             if (!email) {
-                throw new Error("Email is required");
+                throw new Error("El correo electrónico es obligatorio");
             }
             return apiClient.updateUser(email, data);
         },

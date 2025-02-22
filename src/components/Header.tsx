@@ -37,7 +37,7 @@ const Header = () => {
               to="/sign-in"
               className="flex bg-white items-center text-rose-400 px-3 font-bold hover:bg-gray-100"
             >
-              Sign In
+              Iniciar sesión
             </Link>
           )}
         </span>
