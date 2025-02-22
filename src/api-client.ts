@@ -72,7 +72,7 @@ export const updateUser = async (email: string, formData: UserFormData) => {
   }
 
   return response.json();
-}
+};
 
 export const signIn = async (formData: SignInFormData) => {
   try {
@@ -91,14 +91,12 @@ export const signIn = async (formData: SignInFormData) => {
       throw new Error(data.message || "Error al iniciar sesión");
     }
 
-    
     return data;
   } catch (error) {
     console.error("Error en signIn:", error);
     throw error;
   }
 };
-
 
 export const validateToken = async () => {
   const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
@@ -167,6 +165,52 @@ export const fetchMyHotelById = async (idsede: string): Promise<SedeType> => {
 
   return response.json();
 };
+
+export const getOfficeTypesBySede = async (idsede: number) => {
+  if (isNaN(idsede)) {
+    throw new Error("El idsede debe ser un número válido");
+  }
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/my-coworkings/${idsede}/office-types`, {
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error al obtener las oficinas: ${response.status} ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error en getOfficeTypesBySede:", error);
+    throw error; // Re-lanzar el error para manejarlo en el frontend
+  }
+};
+
+
+
+
+export const createOfficeType = async (idsede: number, officeType: {
+  nombre: string;
+  tipo: string;
+  descripcion?: string;
+  capacidad: number; // Se agregó capacidad
+}) => {
+  const response = await fetch(`${API_BASE_URL}/api/my-coworkings/${idsede}/office-types`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(officeType), // Se asegura de incluir capacidad
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error creando el tipo de oficina");
+  }
+
+  return response.json();
+};
+
+
 
 export const updateMyHotelById = async (
   sedeFormData: FormData,
@@ -245,7 +289,6 @@ export const searchHotels = async (
   return response.json();
 };
 
-
 export const fetchSedeDetails = async (idsede: string) => {
   const response = await fetch(`${API_BASE_URL}/api/coworkings/${idsede}`); // Endpoint del backend
   if (!response.ok) {
@@ -261,11 +304,9 @@ export const fetchMyBookings = async (): Promise<BookingType[]> => {
     },
   });
 
-  
   if (!response.ok) {
     throw new Error("Error al obtener las reservas");
   }
-  
 
   return response.json();
 };

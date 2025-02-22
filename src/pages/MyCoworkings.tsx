@@ -3,7 +3,8 @@ import { useQuery, useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
 import * as apiClient from "../api-client";
 import { motion } from "framer-motion";
-import ConfirmDeleteModal from "../components/ConfirmDeleteModal"; // Importamos el modal
+import ConfirmDeleteModal from "../components/ConfirmDeleteModal"; 
+import AddFacilityModal from "../components/AddOfficeTypeModal"; // Importamos el modal para agregar facilidades
 
 interface Coworking {
   idsede: number;
@@ -18,7 +19,8 @@ interface Coworking {
 const MyCoworkings = () => {
   const queryClient = useQueryClient();
   const [selectedCoworking, setSelectedCoworking] = useState<Coworking | null>(null);
-  
+  const [selectedFacilityCoworking, setSelectedFacilityCoworking] = useState<Coworking | null>(null);
+
   const { data: coworkingData, isLoading, isError } = useQuery<Coworking[]>(
     "fetchMyCoworkings",
     apiClient.fetchMyCoworkings
@@ -32,7 +34,7 @@ const MyCoworkings = () => {
     } catch (error) {
       console.error("Error deleting coworking:", error);
     } finally {
-      setSelectedCoworking(null); // Cierra el modal
+      setSelectedCoworking(null);
     }
   };
 
@@ -73,8 +75,15 @@ const MyCoworkings = () => {
             </Link>
 
             <button
+              onClick={() => setSelectedFacilityCoworking(coworking)}
+              className="mt-2 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition text-center"
+            >
+              Gestionar espacios
+            </button>
+
+            <button
               onClick={() => setSelectedCoworking(coworking)}
-              className="mt-4 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition text-center"
+              className="mt-2 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition text-center"
             >
               Eliminar sede
             </button>
@@ -82,13 +91,18 @@ const MyCoworkings = () => {
         ))}
       </div>
 
-      {/* Modal de confirmación */}
       <ConfirmDeleteModal
         isOpen={!!selectedCoworking}
         onClose={() => setSelectedCoworking(null)}
         onConfirm={handleDelete}
         title="Eliminar sede"
         message="¿Estás seguro de que quieres eliminar esta sede? Esta acción no se puede deshacer."
+      />
+
+      <AddFacilityModal
+        isOpen={!!selectedFacilityCoworking}
+        onClose={() => setSelectedFacilityCoworking(null)}
+        idsede={selectedFacilityCoworking?.idsede}
       />
     </div>
   );
