@@ -18,7 +18,7 @@ const Footer = () => {
   };
 
   return (
-    <div className="bg-rose-500 py-10 px-4 sm:px-6 lg:px-8">
+    <div className="bg-rose-500 py-10 px-4 sm:px-6 lg:px-8 max-w-screen">
       <div className="container mx-auto">
         {/* Primera fila: Logo y enlaces */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">

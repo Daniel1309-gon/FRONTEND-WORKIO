@@ -6,7 +6,7 @@ const Header = () => {
   const { isLoggedIn, user } = useAppContext();
 
   return (
-    <div className="bg-rose-500 py-4 sm:py-6">
+    <div className="bg-rose-500 py-4 sm:py-6 max-w-screen">
       <div className="container mx-auto flex justify-between items-center px-4 sm:px-6">
         {/* Logo y nombre */}
         <Link
