@@ -1,3 +1,4 @@
+import { useState } from "react"; // Importar useState
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
@@ -13,13 +14,16 @@ const SignIn = () => {
   const { showToast } = useAppContext();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
   const location = useLocation();
+
+  // Estado para rastrear si el campo de contraseña tiene contenido
+  const [isPasswordTyped, setIsPasswordTyped] = useState(false);
 
   const {
     register,
     formState: { errors },
     handleSubmit,
+    watch, // Usar watch para observar cambios en el campo de contraseña
   } = useForm<SignInFormData>();
 
   const mutation = useMutation(apiClient.signIn, {
@@ -37,6 +41,14 @@ const SignIn = () => {
   const onSubmit = handleSubmit((data) => {
     mutation.mutate(data);
   });
+
+  // Observar cambios en el campo de contraseña
+  const password = watch("password");
+  if (password && !isPasswordTyped) {
+    setIsPasswordTyped(true);
+  } else if (!password && isPasswordTyped) {
+    setIsPasswordTyped(false);
+  }
 
   return (
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
@@ -81,7 +93,9 @@ const SignIn = () => {
         </Link>
         <button
           type="submit"
-          className="bg-rose-400 text-white p-2 font-bold hover:bg-rose-400 text-xl"
+          className={`${
+            isPasswordTyped ? "bg-rose-600" : "bg-rose-400" // Cambiar el color basado en el estado
+          } text-white p-2 font-bold hover:bg-rose-600 text-xl`}
         >
           Iniciar Sesión
         </button>

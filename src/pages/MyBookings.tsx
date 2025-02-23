@@ -8,7 +8,7 @@ const MyBookings = () => {
   );
 
   if (!Array.isArray(bookings) || bookings.length === 0) {
-    return <span>No bookings found</span>;
+    return <span>Aún no tienes reservas</span>;
   }
 
 

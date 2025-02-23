@@ -20,6 +20,8 @@ import ResetPassword from "./pages/ResetPassword";
 import DetailPage from "./pages/DetailPage";
 import MyBookings from "./pages/MyBookings";
 import EditUser from "./pages/EditUser";
+import TermsOfService from "./components/TermsOfService";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -87,6 +89,22 @@ const App = () => {
           element={
             <Layout>
               <DetailPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/PrivacyPolicy"
+          element={
+            <Layout>
+              <PrivacyPolicy />
+            </Layout>
+          }
+        />
+        <Route
+          path="/TermsOfService"
+          element={
+            <Layout>
+              <TermsOfService />
             </Layout>
           }
         />
