@@ -9,6 +9,7 @@ const SignOutButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { showToast, user } = useAppContext();
   const { nombre } = user || {};
+  const { role } = user || {}
 
   const mutation = useMutation(apiClient.signOut, {
     onSuccess: async () => {
@@ -64,15 +65,27 @@ const SignOutButton = () => {
             exit={{ opacity: 0, y: -10 }}
             className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10"
           >
-            <ul className="py-2">
-              <li>
-                <a
-                  href="/edituser"
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >
-                  Editar usuario
-                </a>
-              </li>
+              {role !== 'admin' ? (
+                <ul className="py-2">
+                <li>
+                  <a
+                    href="/edituser"
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    Editar usuario
+                  </a>
+                </li>
+                <li>
+                  <button
+                    onClick={handleClick}
+                    className="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100"
+                  >
+                    Cerrar sesión
+                  </button>
+                </li>
+              </ul>
+              ):(
+                <ul className="py-2">
               <li>
                 <button
                   onClick={handleClick}
@@ -82,6 +95,8 @@ const SignOutButton = () => {
                 </button>
               </li>
             </ul>
+              )}
+            
           </motion.div>
         )}
       </AnimatePresence>
