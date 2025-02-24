@@ -54,6 +54,7 @@ export type BookingType = {
     via_principal: string;
     via_secundaria: string;
     complemento: string;
+    tipo: string;
 };
 
 export type SedeType = {
