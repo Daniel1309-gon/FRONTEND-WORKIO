@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
 import Toast from "../components/Toast";
-import { UserType } from "../../shared/types";
+import { UserType, EmpresaType} from "../../shared/types";
 
 type ToastMessage = {
   message: string;
@@ -13,7 +13,9 @@ type AppContext = {
   showToast: (toastMessage: ToastMessage) => void;
   isLoggedIn: boolean;
   user: UserType | null;
+  empresa: EmpresaType | null;
   clearUser: () => void;
+  clearEmpresa: () => void;
 };
 
 const AppContext = React.createContext<AppContext | undefined>(undefined);
@@ -21,6 +23,7 @@ const AppContext = React.createContext<AppContext | undefined>(undefined);
 export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
   const [user, setUser] = useState<UserType | null>(null);
+  const [empresa, setEmpresa] = useState<EmpresaType | null>(null);
 
   const { isError } = useQuery("validateToken", apiClient.validateToken, {
     retry: false,
@@ -35,12 +38,27 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
     }
   );
 
+  const { data: empresaData } = useQuery<EmpresaType>(
+    "fetchCurrentEmpresa",
+    apiClient.fetchCurrentEmpresa,
+    {
+      retry: false,
+      staleTime: 1000 * 60 * 5,
+    }
+  );
+
   // 🔥 Actualiza `user` cuando `data` cambia
   useEffect(() => {
     if (data) {
       setUser(data);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (empresaData) {
+      setEmpresa(empresaData);
+    }
+  }, [empresaData]);
 
   return (
     <AppContext.Provider
@@ -50,6 +68,8 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
         },
         isLoggedIn: !isError,
         user,
+        empresa,
+        clearEmpresa: () => setEmpresa(null),
         clearUser: () => setUser(null),
       }}
     >

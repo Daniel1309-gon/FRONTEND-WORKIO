@@ -7,13 +7,18 @@ import { motion, AnimatePresence } from "framer-motion";
 const SignOutButton = () => {
   const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
-  const { showToast, user } = useAppContext();
+  const { showToast, user, empresa } = useAppContext();
   const { nombre } = user || {};
+  const { nombre: nombreEmpresa } = empresa || {};
+
+  console.log(nombre);
+  console.log(nombreEmpresa);
 
   const mutation = useMutation(apiClient.signOut, {
     onSuccess: async () => {
       await queryClient.invalidateQueries(); 
       await queryClient.refetchQueries("fetchCurrentUser");
+      await queryClient.refetchQueries("fetchCurrentEmpresa");
       showToast({ message: "Sesión cerrada", type: "SUCCESS" });
     },
     onError: (error: Error) => {

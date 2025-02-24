@@ -6,6 +6,7 @@ import { RecoverPasswordFormData } from "./pages/RecoverPassword";
 import { ResetPasswordFormData } from "./pages/ResetPassword";
 import {
   BookingType,
+  EmpresaType,
   HotelSearchResponse,
   SedeType,
   UserType,
@@ -19,6 +20,16 @@ export const fetchCurrentUser = async (): Promise<UserType> => {
   });
   if (!response.ok) {
     throw new Error("Error obteniendo usuario");
+  }
+  return response.json();
+};
+
+export const fetchCurrentEmpresa = async (): Promise<EmpresaType> => {
+  const response = await fetch(`${API_BASE_URL}/api/admin/empresas`, {
+    credentials: "include",
+  });
+  if (!response.ok) {
+    throw new Error("Error obteniendo empresa");
   }
   return response.json();
 };
