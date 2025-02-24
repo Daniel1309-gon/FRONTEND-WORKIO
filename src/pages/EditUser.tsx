@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { useAppContext } from "../contexts/AppContext";
 import * as apiClient from "../api-client";
 import { useState, useEffect } from "react"; // Importamos useEffect
-import zxcvbn from "zxcvbn"; // Importamos zxcvbn para evaluar la contraseña
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import PasswordStrengthMeter from "../components/PasswordStrengthMeter"; // Importamos el nuevo componente
@@ -30,8 +29,8 @@ const EditUser = () => {
     setError,
   } = useForm<UserFormData>();
 
-  const [passwordStrength, setPasswordStrength] = useState(0); // Estado para la fortaleza de la contraseña
-  const [isPasswordModified, setIsPasswordModified] = useState(false); // Estado para saber si la contraseña fue modificada
+  const [passwordStrength] = useState(0); // Estado para la fortaleza de la contraseña
+  const [isPasswordModified] = useState(false); // Estado para saber si la contraseña fue modificada
   const [password, setPassword] = useState(""); // Estado para la contraseña
   const [showPassword, setShowPassword] = useState(false);
   // Prellenamos los campos con los datos del usuario
@@ -63,12 +62,6 @@ const EditUser = () => {
   );
 
   // Función para evaluar la fortaleza de la contraseña
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    const result = zxcvbn(value);
-    setPasswordStrength(result.score); // Actualizamos el estado de la fortaleza
-    setIsPasswordModified(!!value); // Actualizamos si la contraseña fue modificada
-  };
 
   const onSubmit = handleSubmit((data) => {
     if (data.password && data.password !== data.confirmPassword) {
