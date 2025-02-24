@@ -8,6 +8,19 @@ const Hero = () => {
           </p>
         </div>
       </div>
+      {/* 
+	<div className="container mx-auto flex flex-col gap-2">
+          <h1 className="text-5xl text-white font-bold">Encuentra tu proximo espacio</h1>
+          <p className="text-2xl text-white">
+            Busca los mejores precios en el <strong>coworking</strong> perfecto
+          </p>
+        </div>
+      </div>
+	="container mx-auto flex flex-col gap-2">
+          <h1 className="text-5xl text-white font-bold">Encuentra tu proximo espacio</h1>
+          <p className="text-2xl text-white">
+            Busca los mejores precios en el <strong>coworking</strong> perfecto
+	*/}
     );
   };
   

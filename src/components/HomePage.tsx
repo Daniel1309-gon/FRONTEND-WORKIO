@@ -49,14 +49,31 @@ const HomePage = () => {
         </div>
 
         <div className="w-full bg-gray-100 rounded-lg p-4 mb-4">
-          <h3 className="text-xl font-bold mb-2 text-center">Misión</h3>
-          <p className="text-gray-700 text-center md:px-4">
-            Workio conecta a profesionales con espacios de coworking
-            inspiradores para ampliar su círculo profesional, potenciar
-            su productividad y transformar su experiencia de trabajo remoto.
-          </p>
-        </div>
-      </div>
+
+      {/* 
+	<div className="flex flex-col items-center mt-6">
+        <h2 className="text-3xl font-bold font-raleway mb-8">
+          ¿Quieres colocar tu espacio en Workio?
+        </h2>
+        <div className="flex flex-col lg:flex-row gap-8 w-full px-4 lg:px-20">
+          {/* Tarjeta de Pasos */}
+          <div className="flex flex-col items-center p-4 border rounded-lg shadow-md font-raleway bg-red-100 w-full lg:w-1/3">
+            <FontAwesomeIcon
+              icon={faClipboardList}
+              size="2x"
+              className="mb-2 text-red-500"
+            />
+            <h3 className="text-xl font-bold">Pasos</h3>
+            <p className="text-left font-raleway mt-2 text-sm md:text-base">
+              - Regístrate en nuestra plataforma.
+              <br />
+              - Completa tu perfil de Workio.
+              <br />
+              - Verifica tu cuenta.
+              <br />- ¡Empieza a recibir Reservas!
+            </p>
+          </div>
+      */}
 
       {/* Sección de Pasos, Requisitos y Contacto */}
       <div className="flex flex-col items-center mt-6">
