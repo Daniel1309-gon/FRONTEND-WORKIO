@@ -49,14 +49,6 @@ const HomePage = () => {
         </div>
 
         <div className="w-full bg-gray-100 rounded-lg p-4 mb-4">
-          <h3 className="text-xl font-bold mb-2 text-center">Misión</h3>
-          <p className="text-gray-700 text-center md:px-4">
-            Workio conecta a profesionales con espacios de coworking
-            inspiradores para ampliar su círculo profesional, potenciar
-            su productividad y transformar su experiencia de trabajo remoto.
-          </p>
-        </div>
-      </div>
 
       {/* 
 	<div className="flex flex-col items-center mt-6">
