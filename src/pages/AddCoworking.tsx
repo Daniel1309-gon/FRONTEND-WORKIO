@@ -11,7 +11,7 @@ const AddHotel = () => {
       showToast({ message: "Coworking Guardado!", type: "SUCCESS" });
     },
     onError: () => {
-      showToast({ message: "Error Guardando Cowroking", type: "ERROR" });
+      showToast({ message: "Error Guardando Coworking", type: "ERROR" });
     },
   });
 

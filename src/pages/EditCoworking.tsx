@@ -27,7 +27,7 @@ const EditHotel = () => {
         navigate('/');
       },
       onError: () => {
-        showToast({ message: "Error editando coworking", type: "ERROR" });
+        showToast({ message: "Error editando Coworking", type: "ERROR" });
       },
     }
   );
