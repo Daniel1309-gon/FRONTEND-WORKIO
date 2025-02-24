@@ -13,8 +13,6 @@ export type RegisterFormDataAdmin = {
   direccion: string;
   telefono: string;
   email: string;
-  password: string;
-  confirmPassword: string;
   contrato_firmado: boolean;
   termsAccepted: boolean;
 };
@@ -26,7 +24,6 @@ const RegisterAdmin = () => {
 
   const {
     register,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFormDataAdmin>();
@@ -137,46 +134,6 @@ const RegisterAdmin = () => {
           />
           {errors.email && (
             <span className="text-red-500">{errors.email.message}</span>
-          )}
-        </label>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <label className="text-gray-700 text-sm font-bold">
-          Contraseña
-          <input
-            type="password"
-            className="border rounded w-full py-1 px-2 font-normal"
-            {...register("password", {
-              required: "Este campo es requerido",
-              minLength: {
-                value: 6,
-                message: "La contraseña debe tener al menos 6 caracteres",
-              },
-            })}
-          />
-          {errors.password && (
-            <span className="text-red-500">{errors.password.message}</span>
-          )}
-        </label>
-
-        <label className="text-gray-700 text-sm font-bold">
-          Confirmar Contraseña
-          <input
-            type="password"
-            className="border rounded w-full py-1 px-2 font-normal"
-            {...register("confirmPassword", {
-              validate: (val) => {
-                if (!val) {
-                  return "Este campo es requerido";
-                } else if (watch("password") !== val) {
-                  return "Las contraseñas no coinciden";
-                }
-              },
-            })}
-          />
-          {errors.confirmPassword && (
-            <span className="text-red-500">{errors.confirmPassword.message}</span>
           )}
         </label>
       </div>

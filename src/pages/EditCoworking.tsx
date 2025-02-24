@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import * as apiClient from "../api-client";
-import ManageHotelForm from "../forms/ManageHotelForm/ManageHotelForm";
+import ManageHotelForm from "../forms/ManageHotelForm/ManageCoworkingForm";
 import { useAppContext } from "../contexts/AppContext";
 import { SedeType } from "../../shared/types"; // Asegúrate de definir esta interfaz
 

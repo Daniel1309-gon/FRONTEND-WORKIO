@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { coworkingTypes } from "../../config/coworking-options-config";
 //import { HotelFormData } from "./ManageHotelForm";
-import { SedeFormData } from "./ManageHotelForm";
+import { SedeFormData } from "./ManageCoworkingForm";
 
 const TypeSection = () => {
   const {
