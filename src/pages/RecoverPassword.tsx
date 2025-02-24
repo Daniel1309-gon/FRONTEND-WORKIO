@@ -13,7 +13,7 @@ const RecoverPassword = () => {
   const navigate = useNavigate();
   const { showToast } = useAppContext();
   const { register, handleSubmit, formState: { errors } } = useForm<RecoverPasswordFormData>();
-
+  const { t } = useTranslation();
   const mutation = useMutation(apiClient.recoverPassword, {
     onSuccess: () => {
       showToast({ message: "Password recovery email sent!", type: "SUCCESS" });
