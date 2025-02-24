@@ -28,6 +28,27 @@ const Footer = () => {
             Workio
           </span>
 
+	  {/* 
+	<div>
+		<button
+                onClick={() => openModal(<PrivacyPolicy />)}
+                className="text-sm md:text-base hover:text-rose-200 transition-colors text-white font-bold"
+              >
+                Política de Privacidad
+              </button>
+            </Link>
+
+            <Link to="/TermsOfService">
+              <button
+                onClick={() => openModal(<TermsOfService />)}
+                className="text-sm md:text-base hover:text-rose-200 transition-colors text-white font-bold"
+              >
+                Términos de Nuestro Servicio
+              </button>
+
+
+	 */}
+
           {/* Enlaces centrados en móviles, alineados a la derecha en pantallas grandes */}
           <div className="flex flex-col md:flex-row gap-4 md:gap-6 text-center md:text-left">
 
