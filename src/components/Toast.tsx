@@ -27,7 +27,7 @@ const Toast = ({ message, type, onClose }: ToastProps) => {
 
   const styles = `${
     type === "SUCCESS" ? "bg-green-600" : "bg-red-600"
-  } fixed top-20 right-4 z-50 p-4 rounded-md text-white max-w-md 
+  } fixed top-20 right-14 z-50 p-4 rounded-md text-white max-w-md 
      transition-opacity duration-500 ${
        visible ? "opacity-100" : "opacity-0"
      }`;
