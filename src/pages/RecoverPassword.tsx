@@ -3,6 +3,7 @@ import { useMutation } from "react-query";
 import * as apiClient from "../api-client";
 import { useAppContext } from "../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export type RecoverPasswordFormData = {
   email: string;
@@ -12,14 +13,17 @@ const RecoverPassword = () => {
   const navigate = useNavigate();
   const { showToast } = useAppContext();
   const { register, handleSubmit, formState: { errors } } = useForm<RecoverPasswordFormData>();
-
+  const { t } = useTranslation();
   const mutation = useMutation(apiClient.recoverPassword, {
     onSuccess: () => {
       showToast({ message: "Password recovery email sent!", type: "SUCCESS" });
       navigate("/reset-password")
     },
     onError: (error: Error) => {
-      showToast({ message: error.message, type: "ERROR" });
+      const translatedMessage = t(`errors.${error.message}`, {
+        defaultValue: "Ocurrió un error inesperado",
+      });
+      showToast({ message: translatedMessage, type: "ERROR" });
     },
   });
 

@@ -72,6 +72,27 @@ const PrivacyPolicy = () => {
         <br />
         <strong>Contacto</strong>
         <br />
+	{/*
+	  </li>
+          <li>
+            Comunicarnos con usted en relación con su pedido y cualquier problema
+            o consulta relacionada con nuestros servicios.
+          </li>
+          <li>Mejorar y personalizar su experiencia en la Aplicación.</li>
+        </ul>
+        <br />
+        <strong>Divulgación de Datos</strong>
+        <br />
+	<h2 className="font-bold font-raleway text-2xl">
+          Política de privacidad
+        </h2>
+        <p>
+          Esta página le informa sobre nuestras políticas respecto a la
+          recopilación, uso y divulgación de datos personales cuando usted utiliza
+          nuestra aplicación y sobre los derechos que le asisten respecto a esos
+          datos.
+        </p>
+	   */}
         <p>
           Si tiene alguna pregunta sobre esta Política de Privacidad, no dude en
           ponerse en contacto con nosotros.

@@ -30,9 +30,15 @@ const PasswordStrengthMeter = ({ password }: PasswordStrengthMeterProps) => {
       case "Avoid sequences":
         return "Evita secuencias comunes (por ejemplo, '1234', 'abcd').";
       case "Avoid recent years":
-        return "Evita años recientes (por ejemplo, '2023').";
+        return "Evita años recientes (por ejemplo, '2025').";
+      case "Avoid years that are associated with you":
+        return "vita años relacionados contigo (como tu año de nacimiento).";
+      case "Avoid dates and years that are associated with you":
+        return "Evita fechas y años que puedan estar relacionados contigo.";
       case "Avoid common words and patterns":
         return "Evita palabras comunes y patrones predecibles.";
+      case "Use a longer keyboard pattern with more turns":
+        return "Usa un patrón de teclado más largo con más giros.";
       default:
         return suggestion;
     }

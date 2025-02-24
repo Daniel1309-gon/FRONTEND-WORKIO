@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import { useAppContext } from "../contexts/AppContext";
 import * as apiClient from "../api-client";
 import { useState, useEffect } from "react"; // Importamos useEffect
-import zxcvbn from "zxcvbn"; // Importamos zxcvbn para evaluar la contraseña
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
+import PasswordStrengthMeter from "../components/PasswordStrengthMeter"; // Importamos el nuevo componente
 
 export type UserFormData = {
   firstName: string;
@@ -29,9 +29,9 @@ const EditUser = () => {
     setError,
   } = useForm<UserFormData>();
 
-  const [passwordStrength, setPasswordStrength] = useState(0); // Estado para la fortaleza de la contraseña
-  const [isPasswordModified, setIsPasswordModified] = useState(false); // Estado para saber si la contraseña fue modificada
-
+  const [passwordStrength] = useState(0); // Estado para la fortaleza de la contraseña
+  const [isPasswordModified] = useState(false); // Estado para saber si la contraseña fue modificada
+  const [password, setPassword] = useState(""); // Estado para la contraseña
   const [showPassword, setShowPassword] = useState(false);
   // Prellenamos los campos con los datos del usuario
   useEffect(() => {
@@ -62,12 +62,6 @@ const EditUser = () => {
   );
 
   // Función para evaluar la fortaleza de la contraseña
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    const result = zxcvbn(value);
-    setPasswordStrength(result.score); // Actualizamos el estado de la fortaleza
-    setIsPasswordModified(!!value); // Actualizamos si la contraseña fue modificada
-  };
 
   const onSubmit = handleSubmit((data) => {
     if (data.password && data.password !== data.confirmPassword) {
@@ -139,7 +133,7 @@ const EditUser = () => {
                   message: "La contraseña debe tener al menos 6 caracteres",
                 },
               })}
-              onChange={handlePasswordChange}
+              onChange={(e) => setPassword(e.target.value)} // Actualizamos el estado de la contraseña
             />
             <button
               type="button"
@@ -152,33 +146,8 @@ const EditUser = () => {
           {errors.password && (
             <span className="text-red-500">{errors.password.message}</span>
           )}
-          {isPasswordModified && (
-            <div className="mt-2">
-              <div className="w-full bg-gray-200 h-2 rounded">
-                <div
-                  className={`h-2 rounded ${
-                    passwordStrength === 0
-                      ? "bg-red-500 w-1/5"
-                      : passwordStrength === 1
-                      ? "bg-orange-500 w-2/5"
-                      : passwordStrength === 2
-                      ? "bg-yellow-500 w-3/5"
-                      : passwordStrength === 3
-                      ? "bg-blue-500 w-4/5"
-                      : "bg-green-500 w-full"
-                  }`}
-                />
-              </div>
-              <p className="text-sm text-gray-600 mt-1">
-                Fortaleza:{" "}
-                {
-                  ["Muy Débil", "Débil", "Moderada", "Fuerte", "Muy Fuerte"][
-                    passwordStrength
-                  ]
-                }
-              </p>
-            </div>
-          )}
+          {/* Componente de fortaleza de contraseña */}
+          <PasswordStrengthMeter password={password} />
         </label>
       </div>
       <div className="flex p-5 gap-2">

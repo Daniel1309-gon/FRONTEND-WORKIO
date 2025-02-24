@@ -6,6 +6,7 @@ import { useAppContext } from "../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export type RegisterFormDataAdmin = {
   name: string;
@@ -21,7 +22,7 @@ const RegisterAdmin = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { showToast } = useAppContext();
-
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -35,7 +36,10 @@ const RegisterAdmin = () => {
       navigate("/");
     },
     onError: (error: Error) => {
-      showToast({ message: error.message, type: "ERROR" });
+      const translatedMessage = t(`errors.${error.message}`, {
+        defaultValue: "Ocurrió un error inesperado",
+      });
+      showToast({ message: translatedMessage, type: "ERROR" });
     },
   });
 

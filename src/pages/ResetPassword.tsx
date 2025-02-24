@@ -5,6 +5,7 @@ import { useAppContext } from "../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import zxcvbn from "zxcvbn"; // Importamos zxcvbn para evaluar la contraseña
+import { useTranslation } from "react-i18next";
 
 export type ResetPasswordFormData = {
   email: string;
@@ -22,7 +23,7 @@ const ResetPassword = () => {
     watch,
     formState: { errors },
   } = useForm<ResetPasswordFormData>();
-
+  const { t } = useTranslation();
   const [passwordStrength, setPasswordStrength] = useState(0); // Estado para la fortaleza de la contraseña
 
   const mutation = useMutation(apiClient.resetPassword, {
@@ -32,7 +33,10 @@ const ResetPassword = () => {
     },
     onError: (error: Error) => {
       console.log(error);
-      showToast({ message: error.message, type: "ERROR" });
+      const translatedMessage = t(`errors.${error.message}`, {
+        defaultValue: "Ocurrió un error inesperado",
+      });
+      showToast({ message: translatedMessage, type: "ERROR" });
     },
   });
 

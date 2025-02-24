@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
 import { useAppContext } from "../contexts/AppContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export type SignInFormData = {
   email: string;
@@ -15,6 +16,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const location = useLocation();
+  const { t } = useTranslation();
 
   // Estado para rastrear si el campo de contraseña tiene contenido
   const [isPasswordTyped, setIsPasswordTyped] = useState(false);
@@ -34,7 +36,10 @@ const SignIn = () => {
       navigate(location.state?.from?.pathname || "/");
     },
     onError: (error: Error) => {
-      showToast({ message: error.message, type: "ERROR" });
+      const translatedMessage = t(`errors.${error.message}`, {
+        defaultValue: "Ocurrió un error inesperado",
+      });
+      showToast({ message: translatedMessage, type: "ERROR" });
     },
   });
 

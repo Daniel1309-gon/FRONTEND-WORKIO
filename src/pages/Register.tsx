@@ -8,6 +8,7 @@ import { useState } from "react";
 import PasswordStrengthMeter from "../components/PasswordStrengthMeter"; // Importamos el nuevo componente
 import TermsOfService from "../components/TermsOfService";
 import zxcvbn from "zxcvbn";
+import { useTranslation } from "react-i18next";
 
 export type RegisterFormData = {
   firstName: string;
@@ -22,7 +23,7 @@ const Register = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { showToast } = useAppContext();
-
+  const { t } = useTranslation();
   const {
     register,
     watch,
@@ -37,7 +38,10 @@ const Register = () => {
       navigate("/");
     },
     onError: (error: Error) => {
-      showToast({ message: error.message, type: "ERROR" });
+      const translatedMessage = t(`errors.${error.message}`, {
+        defaultValue: "Ocurrió un error inesperado",
+      });
+      showToast({ message: translatedMessage, type: "ERROR" });
     },
   });
 
