@@ -11,32 +11,36 @@ import ImageCarousel from "../components/ImgCarousel";
 const DetailPage = () => {
   const { idsede } = useParams<{ idsede: string }>();
   const [hotel, setHotel] = useState<HotelType | null>(null);
-  // Estados para las fechas de reserva
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-
-  //console.log("id", idsede);
+  const [reservationDate, setReservationDate] = useState<Date | null>(null); // Fecha para reserva por horas
+  const [startTime, setStartTime] = useState<Date | null>(null);
+  const [endTime, setEndTime] = useState<Date | null>(null);
+  const [reservationType, setReservationType] = useState("days");
 
   // Función para calcular la diferencia de días entre dos fechas
   const getDaysDifference = (start: Date | null, end: Date | null) => {
-    if (!start || !end) return 0; // Si no hay fechas seleccionadas, devuelve 0
-    const diffInMs = end.getTime() - start.getTime(); // Resta los timestamps
-    return Math.ceil(diffInMs / (1000 * 60 * 60 * 24)); // Convierte de milisegundos a días
+    if (!start || !end) return 0;
+    const diffInMs = end.getTime() - start.getTime();
+    return Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
   };
-  
+
+  // Función para calcular la diferencia de horas entre dos horas
+  const getHoursDifference = (start: Date | null, end: Date | null) => {
+    if (!start || !end) return 0;
+    const diffInMs = end.getTime() - start.getTime();
+    return Math.ceil(diffInMs / (1000 * 60 * 60));
+  };
+
   const roundToNearest500 = (number: number): number => {
     return Math.ceil(number / 500) * 500;
   };
+
   useEffect(() => {
     const fetchHotelDetails = async () => {
-
-
       try {
-        const response = await fetch(
-          `${API_BASE_URL}/api/coworkings/${idsede}`
-        ); // Endpoint del backend
+        const response = await fetch(`${API_BASE_URL}/api/coworkings/${idsede}`);
         const data = await response.json();
-        console.log("data", data);
         setHotel(data);
       } catch (error) {
         console.error("Error fetching hotel details:", error);
@@ -49,28 +53,50 @@ const DetailPage = () => {
   }, [idsede]);
 
   if (!hotel) {
-    return <div>Cargando...</div>; // Mientras se carga, mostramos un mensaje
+    return <div>Cargando...</div>;
   }
 
   const handleReserve = async () => {
-    if (!startDate || !endDate || !hotel) return;
-    const subtotalPrice =
-      getDaysDifference(startDate, endDate) * hotel.price_per_day * 1.15 / 0.9406;
-    const totalPrice = roundToNearest500(subtotalPrice); // Añade un 15% PARA Workio
+    if (reservationType === "days" && (!startDate || !endDate)) return;
+    if (reservationType === "hours" && (!reservationDate || !startTime || !endTime)) return;
+
+    let totalPrice = 0;
+    if (reservationType === "days") {
+      const subtotalPrice = getDaysDifference(startDate, endDate) * hotel.price_per_day * 1.15 / 0.9406;
+      totalPrice = roundToNearest500(subtotalPrice);
+    } else if (reservationType === "hours") {
+      const subtotalPrice = getHoursDifference(startTime, endTime) * (hotel.price_per_day / 8) * 1.15 / 0.9406;
+      totalPrice = roundToNearest500(subtotalPrice);
+    }
+
+    const formatDate = (date: Date) => {
+      const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+      return localDate.toISOString().split("T")[0];
+    };
+
+    const formatTime = (date: Date) => {
+      const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+      return localDate.toISOString().split("T")[1].slice(0, 5);
+    };
+
     const reservationData = {
       idsede: idsede,
-      startDate: startDate.toISOString().split("T")[0], // Formato YYYY-MM-DD
-      endDate: endDate.toISOString().split("T")[0],
-      totalDays: getDaysDifference(startDate, endDate),
-      totalPrice: totalPrice, // Precio total
+      startDate: reservationType === "days" ? formatDate(startDate!) : null,
+      endDate: reservationType === "days" ? formatDate(endDate!) : null,
+      reservationDate: reservationType === "hours" ? formatDate(reservationDate!) : null,
+      startTime: reservationType === "hours" && startTime ? formatTime(startTime) : null,
+      endTime: reservationType === "hours" && endTime ? formatTime(endTime) : null,
+      totalDays: reservationType === "days" ? getDaysDifference(startDate, endDate) : null,
+      totalHours: reservationType === "hours" && startTime && endTime ? getHoursDifference(startTime, endTime) : null,
+      totalPrice: totalPrice,
       sedeName: hotel.name,
       imgUrl: hotel.image_urls[0],
       idempresa: hotel.idempresa,
+      reservationType: reservationType
     };
 
-    alert(totalPrice);
+    console.log(reservationData);
 
-    console.log("reservationData", reservationData);
     try {
       const response = await fetch(`${API_BASE_URL}/api/payment/create-order`, {
         method: "POST",
@@ -80,6 +106,7 @@ const DetailPage = () => {
       });
 
       const data = await response.json();
+      console.log(data)
       if (data.url) {
         window.location.href = data.url; // Redirige a MercadoPago
       } else {
@@ -94,7 +121,21 @@ const DetailPage = () => {
     <div className="p-6 lg:p-10 bg-white shadow-lg rounded-lg">
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-8">
         {/* Carrusel de imágenes */}
-        <ImageCarousel imageUrls={hotel.image_urls} />
+        <div>
+          <ImageCarousel imageUrls={hotel.image_urls} />
+          {/* Botón de reserva debajo del carrusel */}
+          <button
+            className="w-full mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg font-bold text-lg hover:bg-blue-500 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={
+              reservationType === "days"
+                ? !startDate || !endDate
+                : !reservationDate || !startTime || !endTime || getHoursDifference(startTime, endTime) <= 0
+            }
+            onClick={handleReserve}
+          >
+            Reservar con MercadoPago
+          </button>
+        </div>
 
         {/* Información del hotel */}
         <div className="space-y-4">
@@ -143,69 +184,135 @@ const DetailPage = () => {
               <span className="font-semibold">
                 Total por día (con impuestos y comisión de pasarela):
               </span>{" "}
-              ${roundToNearest500(hotel.price_per_day * 1.15 /0.9406)}
+              ${roundToNearest500(hotel.price_per_day * 1.15 / 0.9406)}
             </p>
           </div>
 
-          {/* Selección de fechas */}
-          <div>
-            <h2 className="text-xl font-semibold text-gray-800">
-              Selecciona las fechas de tu reserva
-            </h2>
-            <div className="flex flex-col sm:flex-row gap-4 mt-2">
-              <div>
-                <label className="block font-medium text-gray-700">
-                  Desde:
-                </label>
-                <DatePicker
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                  selectsStart
-                  startDate={startDate}
-                  endDate={endDate}
-                  minDate={new Date()}
-                  dateFormat="dd/MM/yyyy"
-                  className="border p-2 rounded-lg w-full"
-                />
-              </div>
-              <div>
-                <label className="block font-medium text-gray-700">
-                  Hasta:
-                </label>
-                <DatePicker
-                  selected={endDate}
-                  onChange={(date) => setEndDate(date)}
-                  selectsEnd
-                  startDate={startDate}
-                  endDate={endDate}
-                  minDate={startDate || new Date()}
-                  dateFormat="dd/MM/yyyy"
-                  className="border p-2 rounded-lg w-full"
-                />
-              </div>
-            </div>
+          {/* Tipo de reserva */}
+          <div className="mt-6">
+            <label className="block text-lg font-semibold text-gray-800">
+              Selecciona tipo de reserva:
+            </label>
+            <select
+              value={reservationType}
+              onChange={(e) => setReservationType(e.target.value)}
+              className="mt-2 p-2 border rounded-lg w-full"
+            >
+              <option value="days">Por días</option>
+              <option value="hours">Por horas</option>
+            </select>
           </div>
 
-          {/* Días seleccionados */}
-          {startDate && endDate && (
-            <div className="p-3 bg-blue-50 rounded-lg">
-              <p className="text-blue-700 font-semibold">
-                <strong>Días seleccionados:</strong>{" "}
-                {getDaysDifference(startDate, endDate)}
-              </p>
+          {/* Selección de fechas u horas según el tipo de reserva */}
+          {reservationType === "days" ? (
+            <div>
+              <h2 className="text-xl font-semibold text-gray-800">
+                Selecciona las fechas de tu reserva
+              </h2>
+              <div className="flex flex-col sm:flex-row gap-4 mt-2">
+                <div>
+                  <label className="block font-medium text-gray-700">
+                    Desde:
+                  </label>
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    selectsStart
+                    startDate={startDate}
+                    endDate={endDate}
+                    minDate={new Date()}
+                    dateFormat="dd/MM/yyyy"
+                    className="border p-2 rounded-lg w-full"
+                  />
+                </div>
+                <div>
+                  <label className="block font-medium text-gray-700">
+                    Hasta:
+                  </label>
+                  <DatePicker
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    selectsEnd
+                    startDate={startDate}
+                    endDate={endDate}
+                    minDate={startDate || new Date()}
+                    dateFormat="dd/MM/yyyy"
+                    className="border p-2 rounded-lg w-full"
+                  />
+                </div>
+              </div>
+              {startDate && endDate && (
+                <div className="p-3 bg-blue-50 rounded-lg mt-4">
+                  <p className="text-blue-700 font-semibold">
+                    <strong>Días seleccionados:</strong>{" "}
+                    {getDaysDifference(startDate, endDate)}
+                  </p>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div>
+              <h2 className="text-xl font-semibold text-gray-800">
+                Selecciona el día y las horas de tu reserva
+              </h2>
+              <div className="flex flex-col sm:flex-row gap-4 mt-2">
+                <div>
+                  <label className="block font-medium text-gray-700">
+                    Fecha:
+                  </label>
+                  <DatePicker
+                    selected={reservationDate}
+                    onChange={(date) => setReservationDate(date)}
+                    minDate={new Date()}
+                    dateFormat="dd/MM/yyyy"
+                    className="border p-2 rounded-lg w-full"
+                  />
+                </div>
+                <div>
+                  <label className="block font-medium text-gray-700">
+                    Hora inicio:
+                  </label>
+                  <DatePicker
+                    selected={startTime}
+                    onChange={(date) => setStartTime(date)}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={60}
+                    timeCaption="Hora"
+                    dateFormat="h:mm aa"
+                    className="border p-2 rounded-lg w-full"
+                  />
+                </div>
+                <div>
+                  <label className="block font-medium text-gray-700">
+                    Hora fin:
+                  </label>
+                  <DatePicker
+                    selected={endTime}
+                    onChange={(date) => setEndTime(date)}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={60}
+                    timeCaption="Hora"
+                    dateFormat="h:mm aa"
+                    className="border p-2 rounded-lg w-full"
+                  />
+                </div>
+              </div>
+              {reservationDate && startTime && endTime && (
+                <div className="p-3 bg-blue-50 rounded-lg mt-4">
+                <p className="text-blue-700 font-semibold">
+                  <strong>Horas seleccionadas:</strong>{" "}
+                  {getHoursDifference(startTime, endTime) > 0 ? (
+                    getHoursDifference(startTime, endTime)
+                  ) : (
+                    <span className="text-red-500">Selecciona un rango de horas válido</span>
+                  )}
+                </p>
+              </div>
+              )}
             </div>
           )}
-
-          {/* Botón de reserva */}
-          <div className="mt-4">
-            <button
-              className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-bold text-lg hover:bg-blue-500 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={!startDate || !endDate}
-              onClick={handleReserve}
-            >
-              Reservar con MercadoPago
-            </button>
-          </div>
         </div>
       </div>
     </div>
