@@ -46,6 +46,19 @@ const Footer = () => {
                 Términos de Nuestro Servicio
               </button>
 
+	<div className="flex flex-col md:flex-row gap-4 md:gap-6 text-center md:text-left">
+
+            <Link to='/PrivacyPolicy'>
+              <button
+                onClick={() => openModal(<PrivacyPolicy />)}
+                className="text-sm md:text-base hover:text-rose-200 transition-colors text-white font-bold"
+              >
+                Política de Privacidad
+              </button>
+            </Link>
+
+            <Link to="/TermsOfService">
+
 
 	 */}
 
