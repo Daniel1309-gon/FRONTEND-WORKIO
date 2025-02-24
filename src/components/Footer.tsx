@@ -67,16 +67,13 @@ const Footer = () => {
 
             <Link to='/PrivacyPolicy'>
               <button
-                onClick={() => openModal(<PrivacyPolicy />)}
                 className="text-sm md:text-base hover:text-rose-200 transition-colors text-white font-bold"
               >
                 Política de Privacidad
               </button>
             </Link>
-
             <Link to="/TermsOfService">
               <button
-                onClick={() => openModal(<TermsOfService />)}
                 className="text-sm md:text-base hover:text-rose-200 transition-colors text-white font-bold"
               >
                 Términos de Nuestro Servicio
