@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
@@ -30,14 +30,29 @@ const AddAdmin = () => {
     register: registerForm,
     handleSubmit: handleSubmitForm,
     formState: { errors: formErrors },
-  } = useForm<RegisterFormData>();
+    reset
+  } = useForm<RegisterFormData>({
+    defaultValues: {
+      nombre: "",
+      nit: "",
+      email: "",
+      telefono: "",
+      direccion: ""
+    }
+  });
 
   // Formulario de login
   const {
     register: registerLogin,
     handleSubmit: handleSubmitLogin,
     formState: { errors: loginErrors },
+    setValue
   } = useForm<LoginFormData>();
+  
+  useEffect(() => {
+    setValue("username", "");
+    setValue("password", "");
+  }, []);
 
   const mutation = useMutation(apiClient.addAdmin, {
     onSuccess: async () => {
@@ -89,6 +104,7 @@ const AddAdmin = () => {
             <input
               className="border rounded w-full py-2 px-3 font-normal mt-1"
               type="text"
+              autoComplete="off"
               {...registerLogin("username", { required: "Usuario es obligatorio" })}
             />
             {loginErrors.username && <span className="text-red-500">{loginErrors.username.message}</span>}
@@ -99,6 +115,7 @@ const AddAdmin = () => {
             <input
               className="border rounded w-full py-2 px-3 font-normal mt-1"
               type="password"
+              autoComplete="off"
               {...registerLogin("password", { required: "Contraseña es obligatoria" })}
             />
             {loginErrors.password && <span className="text-red-500">{loginErrors.password.message}</span>}
@@ -123,7 +140,9 @@ const AddAdmin = () => {
           <h2 className="text-2xl font-bold">Registro de Empresa por Workio</h2>
           <button
             type="button"
-            onClick={() => setIsAuthenticated(false)}
+            onClick={() => {
+              reset();
+              setIsAuthenticated(false)}}
             className="bg-gray-200 text-gray-700 px-3 py-1 rounded-lg hover:bg-gray-300 text-sm"
           >
             Cerrar Sesión
@@ -133,7 +152,8 @@ const AddAdmin = () => {
         <label className="text-gray-700 text-sm font-bold">
           Nombre de la Empresa
           <input
-            className="border rounded w-full py-2 px-3 font-normal mt-1"
+            className="border rounded w-full py-2 px-3 font-normal mt-1 "
+            autoComplete="off"
             {...registerForm("nombre", { required: "Este campo es obligatorio" })}
           />
           {formErrors.nombre && <span className="text-red-500">{formErrors.nombre.message}</span>}
@@ -143,6 +163,7 @@ const AddAdmin = () => {
           NIT
           <input
             className="border rounded w-full py-2 px-3 font-normal mt-1"
+            autoComplete="off"
             {...registerForm("nit", { required: "Este campo es obligatorio" })}
           />
           {formErrors.nit && <span className="text-red-500">{formErrors.nit.message}</span>}
@@ -153,6 +174,7 @@ const AddAdmin = () => {
           <input
             type="email"
             className="border rounded w-full py-2 px-3 font-normal mt-1"
+            autoComplete="off"
             {...registerForm("email", {
               required: "Este campo es obligatorio",
               pattern: {
@@ -168,6 +190,7 @@ const AddAdmin = () => {
           Teléfono
           <input
             className="border rounded w-full py-2 px-3 font-normal mt-1"
+            autoComplete="off"
             {...registerForm("telefono", { required: "Este campo es obligatorio" })}
           />
           {formErrors.telefono && <span className="text-red-500">{formErrors.telefono.message}</span>}
@@ -177,6 +200,7 @@ const AddAdmin = () => {
           Dirección
           <input
             className="border rounded w-full py-2 px-3 font-normal mt-1"
+            autoComplete="off"
             placeholder="Ej: Calle 50 # 15-20"
             {...registerForm("direccion", { required: "Este campo es obligatorio" })}
           />
