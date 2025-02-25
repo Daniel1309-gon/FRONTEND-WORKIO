@@ -21,6 +21,8 @@ export type AdminType = {
     role: string;
     email: string;
     idempresa: string;
+    nombre?: string;
+    apellido?: string;
 }
   
 export type HotelType = {
