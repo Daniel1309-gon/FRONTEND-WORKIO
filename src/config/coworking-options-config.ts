@@ -18,7 +18,7 @@ export const coworkingTypes = [
   
   export const coworkingFacilities = [
     "Wi-Fi De Alta Velocidad",
-    "Aparcamiento",
+    "Mobiliario Ergonomico",
     "Transporte al Aeropuerto",
     "Habitaciones Familiares",
     "Habitaciones para no Fumadores",
