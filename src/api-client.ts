@@ -5,6 +5,7 @@ import { SignInFormData } from "./pages/SignIn";
 import { RecoverPasswordFormData } from "./pages/RecoverPassword";
 import { ResetPasswordFormData } from "./pages/ResetPassword";
 import {
+  AdminType,
   BookingType,
   EmpresaType,
   HotelSearchResponse,
@@ -24,8 +25,18 @@ export const fetchCurrentUser = async (): Promise<UserType> => {
   return response.json();
 };
 
-export const fetchCurrentEmpresa = async (): Promise<EmpresaType> => {
-  const response = await fetch(`${API_BASE_URL}/api/admin/empresas`, {
+export const fetchCurrentAdmin = async (): Promise<AdminType> => {
+  const response = await fetch(`${API_BASE_URL}/api/admins/me`, {
+    credentials: "include",
+  });
+  if (!response.ok) {
+    throw new Error("Error obteniendo admin");
+  }
+  return response.json();
+};
+
+export const fetchEmpresa = async (id_empresa: string): Promise<EmpresaType> => {
+  const response = await fetch(`${API_BASE_URL}/api/admins/empresas/${id_empresa}`, {
     credentials: "include",
   });
   if (!response.ok) {
@@ -63,6 +74,23 @@ export const registerAdmin = async (formData: RegisterFormDataAdmin) => {
 
   const responseBody = await response.json();
 
+  if (!response.ok) {
+    throw new Error(responseBody.message);
+  }
+};
+
+export const addAdmin = async (formData: RegisterFormDataAdmin) => {
+  const response = await fetch(`${API_BASE_URL}/api/admins/register`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
+
+  const responseBody = await response.json();
+  console.log(responseBody);
   if (!response.ok) {
     throw new Error(responseBody.message);
   }

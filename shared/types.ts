@@ -8,13 +8,20 @@ export type UserType = {
 };
 
 export type EmpresaType = {
-    idEmpresa: number;
+    idempresa: number;
     nombre: string;
     nit: string;
     idDireccion: number;
     telefono: string;
     email: string;
   };
+
+export type AdminType = {
+    userid: string;
+    role: string;
+    email: string;
+    idempresa: string;
+}
   
 export type HotelType = {
     _id: number; // Opcional porque es autoincremental

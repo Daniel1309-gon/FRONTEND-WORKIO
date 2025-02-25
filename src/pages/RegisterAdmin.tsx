@@ -9,8 +9,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export type RegisterFormDataAdmin = {
-  name: string;
-  NIT: string;
+  nombre: string;
+  nit: string;
   direccion: string;
   telefono: string;
   email: string;
@@ -68,10 +68,10 @@ const RegisterAdmin = () => {
           Nombre de la Empresa
           <input
             className="border rounded w-full py-1 px-2 font-normal"
-            {...register("name", { required: "Este campo es requerido" })}
+            {...register("nombre", { required: "Este campo es requerido" })}
           />
-          {errors.name && (
-            <span className="text-red-500">{errors.name.message}</span>
+          {errors.nombre && (
+            <span className="text-red-500">{errors.nombre.message}</span>
           )}
         </label>
 
@@ -79,7 +79,7 @@ const RegisterAdmin = () => {
           NIT
           <input
             className="border rounded w-full py-1 px-2 font-normal"
-            {...register("NIT", { 
+            {...register("nit", { 
               required: "Este campo es requerido",
               pattern: {
                 value: /^\d{9}-\d{1}$/,
@@ -87,8 +87,8 @@ const RegisterAdmin = () => {
               }
             })}
           />
-          {errors.NIT && (
-            <span className="text-red-500">{errors.NIT.message}</span>
+          {errors.nit && (
+            <span className="text-red-500">{errors.nit.message}</span>
           )}
         </label>
       </div>

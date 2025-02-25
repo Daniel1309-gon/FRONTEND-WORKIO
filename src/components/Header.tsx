@@ -1,9 +1,27 @@
 import { Link } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
+import { useQueryClient } from "react-query";
 import SignOutButton from "./SignOutButton";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const { isLoggedIn, user } = useAppContext();
+  const [currentRole, setCurrentRole] = useState(user?.role);
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    const fetchData = async () => {
+
+      if (user?.role !== currentRole) {
+        setCurrentRole(user?.role);
+      }
+
+      if (currentRole === "admin") {
+        await queryClient.invalidateQueries("fetchCurrentAdmin");
+      }
+    };
+    fetchData();
+  }, [user, currentRole, queryClient]);
 
   return (
     <div className="bg-rose-500 py-4 sm:py-6 max-w-screen">

@@ -22,6 +22,7 @@ import MyBookings from "./pages/MyBookings";
 import EditUser from "./pages/EditUser";
 import TermsOfService from "./components/TermsOfService";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import AddAdmin from "./pages/AddAdmin";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -106,6 +107,12 @@ const App = () => {
             <Layout>
               <TermsOfService />
             </Layout>
+          }
+        />
+        <Route
+          path="/add-admin"
+          element={
+            <AddAdmin />
           }
         />
 

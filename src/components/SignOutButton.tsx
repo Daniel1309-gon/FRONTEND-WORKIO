@@ -8,18 +8,14 @@ const SignOutButton = () => {
   const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
   const { showToast, user, empresa } = useAppContext();
-  const { nombre } = user || {};
-  const { role } = user || {}
-  const { nombre: nombreEmpresa } = empresa || {};
-
-  console.log(nombre);
-  console.log(nombreEmpresa);
+  const { nombre } = user as { nombre?: string } || {};
+  const { nombre: nombreEmpresa } = empresa as { nombre?: string } || {};
+  const { role } = user || {} 
 
   const mutation = useMutation(apiClient.signOut, {
     onSuccess: async () => {
       await queryClient.invalidateQueries(); 
       await queryClient.refetchQueries("fetchCurrentUser");
-      await queryClient.refetchQueries("fetchCurrentEmpresa");
       showToast({ message: "Sesión cerrada", type: "SUCCESS" });
     },
     onError: (error: Error) => {
@@ -40,9 +36,9 @@ const SignOutButton = () => {
       >
         {/* Avatar con inicial */}
         <div className="w-8 h-8 flex items-center justify-center bg-blue-500 text-white font-semibold rounded-full">
-          {nombre ? nombre.charAt(0).toUpperCase() : "?"}
+          {(role === "admin" ? nombreEmpresa : nombre)?.charAt(0).toUpperCase() || "?"}
         </div>
-        <span className="ml-2 text-gray-700">{nombre || "Usuario"}</span>
+        <span className="ml-2 text-gray-700">{(role === "admin" ? nombreEmpresa : nombre) || "Usuario"}</span>
 
         {/* Icono de flecha */}
         <svg

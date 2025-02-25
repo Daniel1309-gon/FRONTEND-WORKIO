@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
 import Toast from "../components/Toast";
-import { UserType, EmpresaType} from "../../shared/types";
+import { AdminType, UserType, EmpresaType } from "../../shared/types";
 
 type ToastMessage = {
   message: string;
@@ -12,53 +12,77 @@ type ToastMessage = {
 type AppContext = {
   showToast: (toastMessage: ToastMessage) => void;
   isLoggedIn: boolean;
-  user: UserType | null;
+  user: UserType | AdminType | null;
   empresa: EmpresaType | null;
   clearUser: () => void;
-  clearEmpresa: () => void;
 };
 
 const AppContext = React.createContext<AppContext | undefined>(undefined);
 
 export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
-  const [user, setUser] = useState<UserType | null>(null);
+  const [user, setUser] = useState<UserType | AdminType | null>(null);
   const [empresa, setEmpresa] = useState<EmpresaType | null>(null);
-
+  const [userRole, setUserRole] = useState<"user" | "admin" | null>(null);
   const { isError } = useQuery("validateToken", apiClient.validateToken, {
     retry: false,
+    onError: () => {
+      // Si falla la validación, limpiamos el usuario
+      setUser(null);
+      setEmpresa(null);
+    }
   });
 
-  const { data } = useQuery<UserType>(
-    "fetchCurrentUser",
-    apiClient.fetchCurrentUser,
+  const getCurrentUser = async () => {
+    try {
+      const userData = await apiClient.fetchCurrentUser();
+      setUserRole("user");
+      return userData;
+    } catch {
+      try {
+        const adminData = await apiClient.fetchCurrentAdmin();
+        setUserRole("admin");
+        return adminData;
+      } catch {
+        setUserRole(null);
+        throw new Error("No authenticated user found");
+      }
+    }
+  };
+
+  const { data: userData } = useQuery<UserType | AdminType>(
+    "getCurrentUser",
+    getCurrentUser,
     {
       retry: false,
       staleTime: 1000 * 60 * 5,
     }
   );
 
-  const { data: empresaData } = useQuery<EmpresaType>(
-    "fetchCurrentEmpresa",
-    apiClient.fetchCurrentEmpresa,
+  const { data: dataEmpresa } = useQuery<EmpresaType>(
+    ["fetchEmpresa", userRole === "admin" ? (userData as AdminType)?.idempresa : null],
+    async () => {
+      return apiClient.fetchEmpresa((userData as AdminType).idempresa);
+    },
     {
+      enabled: userRole === "admin" && !!(userData as AdminType)?.idempresa,
       retry: false,
       staleTime: 1000 * 60 * 5,
     }
   );
-
+  
   // 🔥 Actualiza `user` cuando `data` cambia
   useEffect(() => {
-    if (data) {
-      setUser(data);
+    if (userData) {
+      setUser(userData);
     }
-  }, [data]);
+  }, [userData]);
 
   useEffect(() => {
-    if (empresaData) {
-      setEmpresa(empresaData);
+    if (dataEmpresa) {
+      setEmpresa(dataEmpresa);
     }
-  }, [empresaData]);
+  }, [dataEmpresa]);
 
   return (
     <AppContext.Provider
@@ -69,8 +93,10 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
         isLoggedIn: !isError,
         user,
         empresa,
-        clearEmpresa: () => setEmpresa(null),
-        clearUser: () => setUser(null),
+        clearUser: () => {
+          setUser(null);
+          setEmpresa(null);
+        },
       }}
     >
       {toast && (
@@ -85,7 +111,11 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAppContext = () => {
   const context = useContext(AppContext);
+  if (context === undefined) {
+    throw new Error("useAppContext debe ser usado dentro de un AppContextProvider");
+  }
   return context as AppContext;
 };
