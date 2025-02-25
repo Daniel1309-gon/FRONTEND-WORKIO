@@ -24,5 +24,5 @@ export const coworkingTypes = [
     "Abierto 24/7",
     "Parqueadero",
     "Area de cocina",
-    "Centro Fitness",
+    "Seguridad",
 ];
