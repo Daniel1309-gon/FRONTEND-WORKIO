@@ -21,7 +21,7 @@ export const coworkingTypes = [
     "Mobiliario Ergonomico",
     "Cafe y Bebidas",
     "Impresoras",
-    "Habitaciones para no Fumadores",
+    "Abierto 24/7",
     "Piscina Exterior",
     "SPA",
     "Centro Fitness",
