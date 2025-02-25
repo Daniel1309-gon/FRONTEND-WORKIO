@@ -79,11 +79,9 @@ const HomePage = () => {
         <div className="w-full bg-gray-100 rounded-lg p-4 mb-4 shadow-md transition-shadow hover:shadow-xl hover:bg-gray-50">
           <h3 className="text-xl font-bold mb-2 text-center">Propuesta de valor</h3>
           <p className="text-gray-700 text-center md:px-4">
-            En Workio, <strong>conectamos</strong> personas con <strong>espacios de coworking</strong>{" "} 
-            inspiradores a través de una plataforma <strong>intuitiva</strong> que facilita la <strong>búsqueda</strong>,{" "}
-            <strong>reserva</strong> y <strong>gestión</strong> de espacios, impulsando su productividad y ampliando sus <strong>oportunidades{" "}
-            de crecimiento</strong>.{" "}
-            ¡Conéctate, colabora y crece con Workio!
+            Workio <strong>conecta</strong> a personas, emprendedores, freelancers y empresas{" "}
+            en espacios de coworking flexibles, fomentando la <strong>colaboración</strong> y{" "}
+            la generación de <strong>oportunidades de negocio</strong>.
           </p>
         </div>
 
