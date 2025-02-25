@@ -17,7 +17,7 @@ export const coworkingTypes = [
 ];
   
   export const coworkingFacilities = [
-    "Wi-Fi Gratuito",
+    "Wi-Fi De Alta Velocidad",
     "Aparcamiento",
     "Transporte al Aeropuerto",
     "Habitaciones Familiares",
