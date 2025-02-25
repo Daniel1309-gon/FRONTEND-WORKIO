@@ -20,7 +20,7 @@ export const coworkingTypes = [
     "Wi-Fi De Alta Velocidad",
     "Mobiliario Ergonomico",
     "Cafe y Bebidas",
-    "Habitaciones Familiares",
+    "Impresoras",
     "Habitaciones para no Fumadores",
     "Piscina Exterior",
     "SPA",
