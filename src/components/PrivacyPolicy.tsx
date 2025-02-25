@@ -44,10 +44,9 @@ const PrivacyPolicy = () => {
         <strong>Divulgación de Datos</strong>
         <br />
         <p>
-          No vendemos, comercializamos ni transferimos de ningún modo su
-          información personal a terceros sin su consentimiento, excepto como se
+          No vendemos, comercializamos ni transferimos de ningún modo sus datos a terceros sin su consentimiento, excepto como se
           describe en esta Política de Privacidad. Sin embargo, podemos divulgar
-          su información personal en las siguientes circunstancias:
+          su información en las siguientes circunstancias:
         </p>
         <ul className="list-disc pl-5">
           <li>
