@@ -65,10 +65,10 @@ const HomePage = () => {
         <div className="w-full bg-gray-100 rounded-lg p-4 mb-4">
           <h3 className="text-xl font-bold mb-2 text-center">Misión</h3>
           <p className="text-gray-700 text-center md:px-4">
-            Workio <strong>conecta a personas</strong> con espacios de coworking
-            inspiradores para: Ampliar su <strong>círculo social</strong>
-            <strong>Potenciar su productividad</strong>
-            Transformar su <strong>experiencia de trabajo remoto</strong>
+            En Workio, <strong>conectamos</strong> personas con <strong>espacios de coworking</strong>{" "} 
+            inspiradores a través de una plataforma <strong>intuitiva</strong> que facilita la <strong>búsqueda</strong>,{" "}
+            <strong>reserva</strong> y <strong>gestión</strong> de espacios, impulsando su productividad y ampliando sus <strong>oportunidades{" "}
+            de crecimiento</strong>.{" "}
             ¡Conéctate, colabora y crece con Workio!
           </p>
         </div>
