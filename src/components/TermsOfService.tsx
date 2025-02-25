@@ -53,6 +53,12 @@ const TermsOfService = () => {
         3.3. Las cancelaciones y modificaciones de reservas están sujetas a
         nuestra política de cancelación vigente.
       </p>
+      <p>
+        3.4. Si un usuario no se presenta y no cancela a tiempo, se le cobra el 100% de la reserva.
+      </p>
+      <p>
+        3.5 Si reincide (ej. 2 o más veces en un mes), podrías restringir temporalmente su acceso a reservas o requerir un pago anticipado para futuras reservas.
+      </p>
       <h3 className="font-bold font-raleway text-lg mt-4">
         4. Uso de las Instalaciones
       </h3>
