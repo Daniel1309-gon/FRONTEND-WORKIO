@@ -17,12 +17,12 @@ export const coworkingTypes = [
 ];
   
   export const coworkingFacilities = [
-    "Wi-Fi Gratuito",
-    "Aparcamiento",
-    "Transporte al Aeropuerto",
-    "Habitaciones Familiares",
-    "Habitaciones para no Fumadores",
-    "Piscina Exterior",
-    "SPA",
-    "Centro Fitness",
+    "Wi-Fi De Alta Velocidad",
+    "Mobiliario Ergonomico",
+    "Cafe y Bebidas",
+    "Impresoras",
+    "Abierto 24/7",
+    "Parqueadero",
+    "Area de cocina",
+    "Seguridad",
 ];
