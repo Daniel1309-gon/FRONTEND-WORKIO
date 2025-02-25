@@ -48,22 +48,36 @@ const HomePage = () => {
           Acerca de Nosotros
         </h2>
 
-        <div className="w-full bg-gray-100 rounded-lg p-4 mb-4">
+        {/* Sección de la Visión */}
+        <div className="w-full bg-gray-100 rounded-lg p-4 mb-4 shadow-md transition-shadow hover:shadow-xl hover:bg-gray-50">
           <h3 className="text-xl font-bold mb-2 text-center">Visión</h3>
-          <p className="text-gray-700 text-center md:px-4">
-            Para 2030, seremos la <strong>plataforma líder</strong> en Bogotá ,{" "}
-            <strong>conectando</strong> personas y emprendedores con{" "}
-            <strong>espacios de coworking</strong> que impulsan la{" "}
-            <strong>productividad</strong> y fomentan{" "}
-            <strong>redes de valor</strong>. Estos espacios están diseñados para
-            fomentar la <strong>colaboración activa</strong> , el intercambio de{" "}
-            <strong>ideas innovadoras</strong> y la creación de{" "}
-            <strong>oportunidades de negocio</strong> significativas.
+          <p className="text-gray-700 text-center md:px-4 lg:px-8">
+            Para 2030, seremos la <strong>plataforma líder</strong> en Bogotá, 
+            <strong> conectando</strong> personas y emprendedores con 
+            <strong> espacios de coworking</strong> que impulsan la 
+            <strong> productividad</strong> y fomentan 
+            <strong> redes de valor</strong>. Estos espacios están diseñados para
+            fomentar la <strong>colaboración activa</strong>, el intercambio de 
+            <strong> ideas innovadoras</strong> y la creación de 
+            <strong> oportunidades de negocio</strong> significativas.
           </p>
         </div>
 
-        <div className="w-full bg-gray-100 rounded-lg p-4 mb-4">
+        {/* Sección de la Misión */}
+        <div className="w-full bg-gray-100 rounded-lg p-4 mb-4 shadow-md transition-shadow hover:shadow-xl hover:bg-gray-50">
           <h3 className="text-xl font-bold mb-2 text-center">Misión</h3>
+          <p className="text-gray-700 text-center md:px-4">
+            En Workio, <strong>conectamos</strong> personas con <strong>espacios de coworking</strong>{" "} 
+            inspiradores a través de una plataforma <strong>intuitiva</strong> que facilita la <strong>búsqueda</strong>,{" "}
+            <strong>reserva</strong> y <strong>gestión</strong> de espacios, impulsando su productividad y ampliando sus <strong>oportunidades{" "}
+            de crecimiento</strong>.{" "}
+            ¡Conéctate, colabora y crece con Workio!
+          </p>
+        </div>
+
+        {/* Sección de la Propuesta de Valor */}
+        <div className="w-full bg-gray-100 rounded-lg p-4 mb-4 shadow-md transition-shadow hover:shadow-xl hover:bg-gray-50">
+          <h3 className="text-xl font-bold mb-2 text-center">Propuesta de valor</h3>
           <p className="text-gray-700 text-center md:px-4">
             En Workio, <strong>conectamos</strong> personas con <strong>espacios de coworking</strong>{" "} 
             inspiradores a través de una plataforma <strong>intuitiva</strong> que facilita la <strong>búsqueda</strong>,{" "}
