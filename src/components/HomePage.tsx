@@ -94,7 +94,7 @@ const HomePage = () => {
               <FontAwesomeIcon
                 icon={faSyncAlt}
                 size="2x"
-                className="mb-2 text-[#af9efe]"
+                className="mb-2 text-red-500"
               />
               <h3 className="text-xl font-bold">Adaptabilidad</h3>
               <p className="text-center font-raleway mt-2 text-sm md:text-base">
@@ -108,7 +108,7 @@ const HomePage = () => {
               <FontAwesomeIcon
                 icon={faEye}
                 size="2x"
-                className="mb-2 text-[#af9efe]"
+                className="mb-2 text-red-500"
               />
               <h3 className="text-xl font-bold">Transparencia</h3>
               <p className="text-center font-raleway mt-2 text-sm md:text-base">
@@ -122,7 +122,7 @@ const HomePage = () => {
               <FontAwesomeIcon
                 icon={faBalanceScale}
                 size="2x"
-                className="mb-2 text-[#af9efe]"
+                className="mb-2 text-red-500"
               />
               <h3 className="text-xl font-bold">Responsabilidad</h3>
               <p className="text-center font-raleway mt-2 text-sm md:text-base">
@@ -136,7 +136,7 @@ const HomePage = () => {
               <FontAwesomeIcon
                 icon={faUsers}
                 size="2x"
-                className="mb-2 text-[#af9efe]"
+                className="mb-2 text-red-500"
               />
               <h3 className="text-xl font-bold">Colaboración</h3>
               <p className="text-center font-raleway mt-2 text-sm md:text-base">
