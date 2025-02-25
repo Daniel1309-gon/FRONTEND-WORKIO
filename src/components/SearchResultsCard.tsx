@@ -8,7 +8,7 @@ type Props = {
 
 const SearchResultsCard = ({ hotel }: Props) => {
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-300 shadow-lg rounded-lg p-6 lg:p-8 gap-6 bg-white">
+    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-300 shadow-lg rounded-lg p-6 lg:p-8 gap-6 bg-white transition-all duration-300 hover:shadow-2xl hover:border-blue-400">
   {/* Imagen del hotel */}
   <div className="w-full h-[300px] rounded-lg overflow-hidden">
     <img
@@ -71,7 +71,8 @@ const SearchResultsCard = ({ hotel }: Props) => {
 
       {/* Precio y botón */}
       <div className="flex flex-col items-end gap-2">
-        <span className="text-lg font-bold text-gray-900">${hotel.price_per_day} por día</span>
+        <span className="text-sm   font-bold text-gray-900">${hotel.price_per_day} por día</span>
+        <span className="text-sm   font-bold text-gray-900">${(hotel.price_per_day / 24).toFixed(2)} por hora</span>
         <Link
           to={`/coworkings/${hotel._id ?? hotel.idsede}`}
           className="bg-blue-600 text-white px-4 py-2 font-bold text-lg rounded-lg hover:bg-blue-500 transition-all"
