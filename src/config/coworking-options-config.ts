@@ -22,7 +22,7 @@ export const coworkingTypes = [
     "Cafe y Bebidas",
     "Impresoras",
     "Abierto 24/7",
-    "Piscina Exterior",
+    "Parqueadero",
     "SPA",
     "Centro Fitness",
 ];
