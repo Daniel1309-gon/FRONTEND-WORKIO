@@ -99,6 +99,7 @@ const EditUser = () => {
           Nombre
           <input
             className="border rounded w-full py-1 px-2 font-normal"
+            maxLength={50}
             {...register("firstName", { required: "El nombre es obligatorio" })}
           />
           {errors.firstName && (
@@ -111,6 +112,7 @@ const EditUser = () => {
           Apellido
           <input
             className="border rounded w-full py-1 px-2 font-normal"
+            maxLength={50}
             {...register("lastName", {
               required: "El apellido es obligatorio",
             })}
@@ -126,6 +128,7 @@ const EditUser = () => {
           <div className="relative">
             <input
               className="border rounded w-full py-1 px-2 font-normal"
+              maxLength={50}
               type={showPassword ? "text" : "password"}
               {...register("password", {
                 minLength: {
@@ -156,6 +159,7 @@ const EditUser = () => {
           <div className="relative">
             <input
               className="border rounded w-full py-1 px-2 font-normal"
+              maxLength={50}
               type={showPassword ? "text" : "password"}
               {...register("confirmPassword", {
                 validate: (val) =>

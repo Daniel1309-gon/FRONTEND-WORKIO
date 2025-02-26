@@ -103,6 +103,7 @@ const AddAdmin = () => {
             Usuario <span className="text-[#f83c5c]">*</span>
             <input
               className="border rounded w-full py-2 px-3 font-normal mt-1"
+              maxLength={50}
               type="text"
               autoComplete="off"
               {...registerLogin("username", { required: "Usuario es obligatorio" })}
@@ -114,6 +115,7 @@ const AddAdmin = () => {
             Contraseña <span className="text-[#f83c5c]">*</span>
             <input
               className="border rounded w-full py-2 px-3 font-normal mt-1"
+              maxLength={50}
               type="password"
               autoComplete="off"
               {...registerLogin("password", { required: "Contraseña es obligatoria" })}
@@ -153,6 +155,7 @@ const AddAdmin = () => {
           Nombre de la Empresa <span className="text-[#f83c5c]">*</span>
           <input
             className="border rounded w-full py-2 px-3 font-normal mt-1 "
+            maxLength={50}
             autoComplete="off"
             {...registerForm("nombre", { required: "Este campo es obligatorio" })}
           />
@@ -163,6 +166,7 @@ const AddAdmin = () => {
           NIT <span className="text-[#f83c5c]">*</span>
           <input
             className="border rounded w-full py-2 px-3 font-normal mt-1"
+            maxLength={50}
             autoComplete="off"
             {...registerForm("nit", { required: "Este campo es obligatorio" })}
           />
@@ -174,6 +178,7 @@ const AddAdmin = () => {
           <input
             type="email"
             className="border rounded w-full py-2 px-3 font-normal mt-1"
+            maxLength={50}
             autoComplete="off"
             {...registerForm("email", {
               required: "Este campo es obligatorio",
@@ -190,6 +195,7 @@ const AddAdmin = () => {
           Teléfono <span className="text-[#f83c5c]">*</span>
           <input
             className="border rounded w-full py-2 px-3 font-normal mt-1"
+            maxLength={50}
             autoComplete="off"
             {...registerForm("telefono", { required: "Este campo es obligatorio" })}
           />
@@ -200,6 +206,7 @@ const AddAdmin = () => {
           Dirección <span className="text-[#f83c5c]">*</span>
           <input
             className="border rounded w-full py-2 px-3 font-normal mt-1"
+            maxLength={50}
             autoComplete="off"
             placeholder="Ej: Calle 50 # 15-20"
             {...registerForm("direccion", { required: "Este campo es obligatorio" })}

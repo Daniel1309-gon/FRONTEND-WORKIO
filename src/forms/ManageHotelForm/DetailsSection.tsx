@@ -16,6 +16,7 @@ const DetailsSection = () => {
         <input
           type="text"
           className="border rounded w-full py-1 px-2 font-normal"
+          maxLength={50}
           {...register("name", { required: "This field is required" })}
         ></input>
         {errors.name && (
@@ -77,6 +78,7 @@ const DetailsSection = () => {
           <input
             type="text"
             className="border rounded w-full py-1 px-2 font-normal"
+            maxLength={50}
             {...register("country", { required: "This field is required" })}
           ></input>
           {errors.country && (
@@ -100,6 +102,7 @@ const DetailsSection = () => {
         <input
           type="number"
           min={1}
+          maxLength={50}
           className="border rounded w-full py-1 px-2 font-normal"
           {...register("price_per_day", { required: "This field is required" })}
         ></input>
@@ -159,6 +162,7 @@ const DetailsSection = () => {
         Vía Principal <span className="text-[#f83c5c]">*</span>
         <input
           type="text"
+          maxLength={50}
           className="border rounded w-full py-1 px-2 font-normal"
           placeholder="Número identificador de la vía"
           {...register("via_principal", { required: "This field is required" })}
@@ -171,6 +175,7 @@ const DetailsSection = () => {
         Vía Secundaria <span className="text-[#f83c5c]">*</span>
         <input
           type="text"
+          maxLength={50}
           className="border rounded w-full py-1 px-2 font-normal"
           placeholder="12b-21"
           {...register("via_secundaria")}
@@ -180,9 +185,9 @@ const DetailsSection = () => {
         Complemento <span className="text-[#f83c5c]">*</span>
         <input
           type="text"
+          maxLength={50}
           className="border rounded w-full py-1 px-2 font-normal"
           placeholder="Edificio esquinero, etc..."
-          maxLength={50}
           {...register("complemento")}
         ></input>
       </label>

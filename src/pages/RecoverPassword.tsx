@@ -38,6 +38,7 @@ const RecoverPassword = () => {
         Email <span className="text-[#f83c5c]">*</span>
         <input
           type="email"
+          maxLength={50}
           className="border rounded w-full py-1 px-2 font-normal"
           {...register("email", { required: "Este campo es obligatorio" })}
         ></input>

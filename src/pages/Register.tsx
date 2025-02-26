@@ -226,7 +226,7 @@ const Register = () => {
         to="/registeradmin"
         className="underline text-black p-2 items-center"
       >
-        Quieres Registrar tu Coworking? Click Aquí
+        ¿Quieres Registrar tu Coworking? Click Aquí
       </Link>
     </form>
   );

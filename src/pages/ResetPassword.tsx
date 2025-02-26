@@ -67,6 +67,7 @@ const ResetPassword = () => {
         <input
           type="email"
           className="border rounded w-full py-1 px-2 font-normal"
+          maxLength={50}
           {...register("email", { required: "Este campo es obligatorio" })}
         />
         {errors.email && <span className="text-red-500">{errors.email.message}</span>}
@@ -77,6 +78,7 @@ const ResetPassword = () => {
         <input
           type="text"
           className="border rounded w-full py-1 px-2 font-normal"
+          maxLength={50}
           {...register("code", { required: "Este campo es obligatorio" })}
         />
         {errors.code && <span className="text-red-500">{errors.code.message}</span>}
@@ -87,6 +89,7 @@ const ResetPassword = () => {
         <input
           type="password"
           className="border rounded w-full py-1 px-2 font-normal"
+          maxLength={50}
           {...register("newPassword", {
             required: "Este campo es obligatorio",
             minLength: {
@@ -126,6 +129,7 @@ const ResetPassword = () => {
         <input
           type="password"
           className="border rounded w-full py-1 px-2 font-normal"
+          maxLength={50}
           {...register("confirmPassword", {
             required: "Este campo es obligatorio",
             validate: (val) =>
