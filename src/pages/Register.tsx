@@ -79,10 +79,6 @@ const Register = () => {
             maxLength={50} // Esto impide que el usuario escriba más de 50 caracteres
             {...register("firstName", {
               required: "Este campo es obligatorio",
-              maxLength: {
-                value: 50,
-                message: "El nombre no puede superar los 50 caracteres",
-              },
             })}
           />
           {errors.firstName && (
@@ -97,10 +93,6 @@ const Register = () => {
             maxLength={50}
             {...register("lastName", {
               required: "Este campo es obligatorio",
-              maxLength: {
-                value: 50,
-                message: "El apellido no puede superar los 50 caracteres",
-              },
           })}
           />
           {errors.lastName && (
@@ -121,10 +113,6 @@ const Register = () => {
               value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
               message: "Ingresa un email válido",
             },
-            maxLength: {
-                value: 50,
-                message: "El email no puede superar los 50 caracteres",
-              },
           })}
         />
         {errors.email && (
@@ -144,10 +132,6 @@ const Register = () => {
               value: 6,
               message: "La contraseña debe tener al menos 6 caracteres",
             },
-            maxLength: {
-                value: 50,
-                message: "La contraseña no puede superar los 50 caracteres",
-              },
           })}
           onChange={(e) => setPassword(e.target.value)} // Actualizamos el estado de la contraseña
         />
@@ -172,10 +156,6 @@ const Register = () => {
                 return "Las contraseñas no coinciden";
               }
             },
-            maxLength: {
-                value: 50,
-                message: "La contraseña no puede superar los 50 caracteres",
-              },
           })}
         />
         {errors.confirmPassword && (

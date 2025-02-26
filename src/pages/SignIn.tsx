@@ -63,6 +63,7 @@ const SignIn = () => {
         <input
           type="email"
           className="border rounded w-full py-1 px-2 font-normal"
+          maxLength={50}
           {...register("email", { required: "Este campo es obligatorio" })}
         ></input>
         {errors.email && (
@@ -74,6 +75,7 @@ const SignIn = () => {
         <input
           type="password"
           className="border rounded w-full py-1 px-2 font-normal"
+          maxLength={50}
           {...register("password", {
             required: "Este campo es obligatorio",
             minLength: {
