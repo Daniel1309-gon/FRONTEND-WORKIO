@@ -75,9 +75,14 @@ const Register = () => {
         <label className="text-gray-700 text-sm font-bold flex-1">
           Nombre <span className="text-[#f83c5c]">*</span>
           <input
-            className="border rounded w-full py-1 px-2 font-normal"
+          className="border rounded w-full py-1 px-2 font-normal"
+            maxLength={50} // Esto impide que el usuario escriba más de 50 caracteres
             {...register("firstName", {
               required: "Este campo es obligatorio",
+              maxLength: {
+                value: 50,
+                message: "El nombre no puede superar los 50 caracteres",
+              },
             })}
           />
           {errors.firstName && (
@@ -89,7 +94,14 @@ const Register = () => {
           Apellido <span className="text-[#f83c5c]">*</span>
           <input
             className="border rounded w-full py-1 px-2 font-normal"
-            {...register("lastName", { required: "Este campo es obligatorio" })}
+            maxLength={50}
+            {...register("lastName", {
+              required: "Este campo es obligatorio",
+              maxLength: {
+                value: 50,
+                message: "El apellido no puede superar los 50 caracteres",
+              },
+          })}
           />
           {errors.lastName && (
             <span className="text-red-500">{errors.lastName.message}</span>
@@ -102,12 +114,17 @@ const Register = () => {
         <input
           type="email"
           className="border rounded w-full py-1 px-2 font-normal"
+          maxLength={50}
           {...register("email", {
             required: "Este campo es obligatorio",
             pattern: {
               value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
               message: "Ingresa un email válido",
             },
+            maxLength: {
+                value: 50,
+                message: "El email no puede superar los 50 caracteres",
+              },
           })}
         />
         {errors.email && (
@@ -120,12 +137,17 @@ const Register = () => {
         <input
           type="password"
           className="border rounded w-full py-1 px-2 font-normal"
+          maxLength={50}
           {...register("password", {
             required: "Este campo es obligatorio",
             minLength: {
               value: 6,
               message: "La contraseña debe tener al menos 6 caracteres",
             },
+            maxLength: {
+                value: 50,
+                message: "La contraseña no puede superar los 50 caracteres",
+              },
           })}
           onChange={(e) => setPassword(e.target.value)} // Actualizamos el estado de la contraseña
         />
@@ -141,6 +163,7 @@ const Register = () => {
         <input
           type="password"
           className="border rounded w-full py-1 px-2 font-normal"
+          maxLength={50}
           {...register("confirmPassword", {
             validate: (val) => {
               if (!val) {
@@ -149,6 +172,10 @@ const Register = () => {
                 return "Las contraseñas no coinciden";
               }
             },
+            maxLength: {
+                value: 50,
+                message: "La contraseña no puede superar los 50 caracteres",
+              },
           })}
         />
         {errors.confirmPassword && (
