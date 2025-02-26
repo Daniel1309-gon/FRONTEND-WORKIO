@@ -73,7 +73,7 @@ const Register = () => {
 
       <div className="flex flex-col md:flex-row gap-5">
         <label className="text-gray-700 text-sm font-bold flex-1">
-          Nombre
+          Nombre <span className="text-[#f83c5c]">*</span>
           <input
             className="border rounded w-full py-1 px-2 font-normal"
             {...register("firstName", {
@@ -86,7 +86,7 @@ const Register = () => {
         </label>
 
         <label className="text-gray-700 text-sm font-bold flex-1">
-          Apellido
+          Apellido <span className="text-[#f83c5c]">*</span>
           <input
             className="border rounded w-full py-1 px-2 font-normal"
             {...register("lastName", { required: "Este campo es obligatorio" })}
@@ -98,7 +98,7 @@ const Register = () => {
       </div>
 
       <label className="text-gray-700 text-sm font-bold flex-1">
-        Email
+        Email <span className="text-[#f83c5c]">*</span>
         <input
           type="email"
           className="border rounded w-full py-1 px-2 font-normal"
@@ -116,7 +116,7 @@ const Register = () => {
       </label>
 
       <label className="text-gray-700 text-sm font-bold flex-1">
-        Contraseña
+        Contraseña <span className="text-[#f83c5c]">*</span>
         <input
           type="password"
           className="border rounded w-full py-1 px-2 font-normal"
@@ -137,7 +137,7 @@ const Register = () => {
       </label>
 
       <label className="text-gray-700 text-sm font-bold flex-1">
-        Confirma Contraseña
+        Confirma Contraseña <span className="text-[#f83c5c]">*</span>
         <input
           type="password"
           className="border rounded w-full py-1 px-2 font-normal"
@@ -171,7 +171,7 @@ const Register = () => {
               openModal(<TermsOfService />);
             }}
           >
-            Acepto los términos de tratamiento de datos personales
+            Acepto los términos de tratamiento de datos personales <span className="text-[#f83c5c]">*</span>
           </button>
         </span>
         <Modal
