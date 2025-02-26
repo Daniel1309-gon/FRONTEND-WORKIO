@@ -186,6 +186,16 @@ const DetailPage = () => {
               </span>{" "}
               ${roundToNearest500(hotel.price_per_day * 1.15 / 0.9406)}
             </p>
+            <p className="text-gray-700">
+              <span className="font-semibold">Subtotal por hora:</span> $
+              {(hotel.price_per_day / 24).toFixed(2)}
+            </p>
+            <p className="text-gray-700">
+              <span className="font-semibold">
+                Total por hora (con impuestos y comisión de pasarela):
+              </span>{" "}
+              ${roundToNearest500((hotel.price_per_day / 24).toFixed(2) * 1.15 / 0.9406)}
+            </p>
           </div>
 
           {/* Tipo de reserva */}

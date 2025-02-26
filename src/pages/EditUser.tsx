@@ -183,7 +183,7 @@ const EditUser = () => {
           )}
         </label>
       </div>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center gap-4 px-4">
         <button
           type="submit"
           className={`bg-rose-400 text-white p-2 font-bold hover:bg-rose-500 text-xl ${
@@ -194,6 +194,12 @@ const EditUser = () => {
           disabled={isPasswordModified && passwordStrength < 2} // Deshabilitar el botón solo si la contraseña es débil y fue modificada
         >
           Actualizar
+        </button>
+        <button
+          type="button"
+          className="bg-red-500 text-white p-2 font-bold hover:bg-red-600 text-xl"
+        >
+          Eliminar
         </button>
       </div>
     </form>
