@@ -19,27 +19,27 @@ const HomePage = () => {
           <h1 className="text-4xl font-bold mb-4">
             Bienvenido a Workio: Donde el trabajo fluye mejor
           </h1>
-          <p className="text-gray-700 text-lg">
-            En Workio, revolucionamos la forma de trabajar al conectar a
-            personas con espacios de coworking diseñados para inspirar
-            productividad, creatividad y colaboración.
-            <br />
-            Encuentra el lugar perfecto para concentrarte, hacer crecer tu red y
-            alcanzar tus metas, con total flexibilidad y seguridad.
-            <br />
-            ¿Tienes un coworking? Te ayudamos a destacar, optimizar la gestión
-            de reservas y llenar tus espacios sin complicaciones.
-            <br />
-            Workio: Tu oficina, a tu manera.
-          </p>
+          <div className="flex flex-col items-center p-4 border rounded-lg shadow-md font-raleway bg-[#ffffff] w-full border border-slate-300 shadow-lg rounded-lg p-6 lg:p-8 gap-6 bg-white transition-all duration-300 hover:shadow-2xl hover:border-[#ffe4e6]">
+            <p className="text-gray-700 text-lg">
+              En Workio, revolucionamos la forma de trabajar al conectar a
+              personas con espacios de Coworking diseñados para inspirar{" "}
+              <strong>productividad</strong>, <strong>creatividad</strong> y <strong>colaboración</strong>.
+              Encuentra el lugar perfecto para concentrarte, hacer crecer tu red y
+              alcanzar tus metas, con total flexibilidad y seguridad.
+              <br />
+              ¿Tienes un coworking? Te ayudamos a destacar, optimizar la gestión
+              de reservas y llenar tus espacios sin complicaciones.
+            </p>
+          </div>
         </div>
-        <div className="lg:w-1/2">
+        <div className="lg:w-1/2 overflow-hidden">
           <img
             src={aboutUsImage}
             alt="Espacio de coworking"
-            className="rounded-lg shadow-lg w-full"
+            className="rounded-lg shadow-lg w-full transition-transform duration-300 hover:scale-110"
           />
         </div>
+
       </div>
 
       {/* Sección de Acerca de Nosotros */}
@@ -90,7 +90,7 @@ const HomePage = () => {
           <h3 className="text-xl font-bold mb-2 text-center">Valores</h3>
           <div className="flex flex-col lg:flex-row gap-8 w-full px-4 lg:px-20 w-full bg-gray-100 rounded-lg p-4 mb-4">
             {/* Tarjeta de Pasos */}
-            <div className="flex flex-col items-center p-4 border rounded-lg shadow-md font-raleway bg-[#ffffff] w-full lg:w-1/3">
+            <div className="flex flex-col items-center p-4 border rounded-lg shadow-md font-raleway bg-[#ffffff] w-full lg:w-1/3 border border-slate-300 shadow-lg rounded-lg p-6 lg:p-8 gap-6 bg-white transition-all duration-300 hover:shadow-2xl hover:border-[#ffe4e6]">
               <FontAwesomeIcon
                 icon={faSyncAlt}
                 size="2x"
@@ -99,12 +99,12 @@ const HomePage = () => {
               <h3 className="text-xl font-bold">Adaptabilidad</h3>
               <p className="text-center font-raleway mt-2 text-sm md:text-base">
                 Espacios flexibles para equipos en movimiento a través de
-                reservas personalizadas a tu gusto
+                reservas personalizadas a tu gusto y necesidades
               </p>
             </div>
 
             {/* Tarjeta de Requisitos */}
-            <div className="flex flex-col items-center p-4 border rounded-lg shadow-md font-raleway bg-[#ffffff] w-full lg:w-1/3">
+            <div className="flex flex-col items-center p-4 border rounded-lg shadow-md font-raleway bg-[#ffffff] w-full lg:w-1/3 border border-slate-300 shadow-lg rounded-lg p-6 lg:p-8 gap-6 bg-white transition-all duration-300 hover:shadow-2xl hover:border-[#ffe4e6]">
               <FontAwesomeIcon
                 icon={faEye}
                 size="2x"
@@ -112,13 +112,13 @@ const HomePage = () => {
               />
               <h3 className="text-xl font-bold">Transparencia</h3>
               <p className="text-center font-raleway mt-2 text-sm md:text-base">
-                Claridad en la información, precios, términos, políticas de
-                acceso y condiciones de usabilidad.
+                Claridad y franqueza en la información, precios, términos, políticas de
+                acceso y condiciones de usabilidad
               </p>
             </div>
 
             {/* Tarjeta de Contacto */}
-            <div className="flex flex-col items-center p-4 border rounded-lg shadow-md font-raleway bg-[#ffffff] w-full lg:w-1/3">
+            <div className="flex flex-col items-center p-4 border rounded-lg shadow-md font-raleway bg-[#ffffff] w-full lg:w-1/3 border border-slate-300 shadow-lg rounded-lg p-6 lg:p-8 gap-6 bg-white transition-all duration-300 hover:shadow-2xl hover:border-[#ffe4e6]">
               <FontAwesomeIcon
                 icon={faBalanceScale}
                 size="2x"
@@ -132,7 +132,7 @@ const HomePage = () => {
             </div>
 
             {/* Tarjeta de Contacto */}
-            <div className="flex flex-col items-center p-4 border rounded-lg shadow-md font-raleway bg-[#ffffff] w-full lg:w-1/3">
+            <div className="flex flex-col items-center p-4 border rounded-lg shadow-md font-raleway bg-[#ffffff] w-full lg:w-1/3 border border-slate-300 shadow-lg rounded-lg p-6 lg:p-8 gap-6 bg-white transition-all duration-300 hover:shadow-2xl hover:border-[#ffe4e6]">
               <FontAwesomeIcon
                 icon={faUsers}
                 size="2x"
@@ -140,8 +140,8 @@ const HomePage = () => {
               />
               <h3 className="text-xl font-bold">Colaboración</h3>
               <p className="text-center font-raleway mt-2 text-sm md:text-base">
-                Fomentar redes de trabajo colaborativo y oportunidades de
-                crecimiento entre personas que comparten un espacio de coworking
+                Redes de trabajo y oportunidades de
+                crecimiento entre personas que comparten un espacio de Coworking
               </p>
             </div>
           </div>
@@ -163,11 +163,13 @@ const HomePage = () => {
             />
             <h3 className="text-xl font-bold">Pasos</h3>
             <p className="text-left font-raleway mt-2 text-sm md:text-base">
-              - Regístrate en nuestra plataforma.
+              - Regístrate en nuestra plataforma de manera gratuita.
               <br />
               - Completa tu perfil de Workio.
               <br />
               - Verifica tu cuenta.
+              <br />
+              - Agrega tus Coworkings.
               <br />- ¡Empieza a recibir Reservas!
             </p>
           </div>
@@ -183,10 +185,14 @@ const HomePage = () => {
             <p className="text-left mt-2 text-sm md:text-base">
               - Licencia de operación válida.
               <br />
-              - Descripción y Fotos.
+              - Identificación del propietario.
+              <br />
+              - Descripción, ubicación y fotos.
               <br />
               - Equipo de recepción propio.
               <br />- Cumplimiento con normas sanitarias.
+              <br />- Validación de comodidades.
+              <br />- Términos y condiciones.
             </p>
           </div>
 
