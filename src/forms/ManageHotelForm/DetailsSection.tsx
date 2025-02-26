@@ -12,7 +12,7 @@ const DetailsSection = () => {
     <div className="flex flex-col gap-4">
       <h1 className="text-3xl font-bold mb-3">Anadir Coworking</h1>
       <label className="text-gray-700 text-sm font-bold flex-1">
-        Nombre
+        Nombre <span className="text-[#f83c5c]">*</span>
         <input
           type="text"
           className="border rounded w-full py-1 px-2 font-normal"
@@ -37,7 +37,7 @@ const DetailsSection = () => {
         </label> */}
 
         <label className="text-gray-700 text-sm font-bold flex-1">
-          Ciudad
+          Ciudad <span className="text-[#f83c5c]">*</span>
           <select
             {...register("city", {
               required: "This field is required",
@@ -73,7 +73,7 @@ const DetailsSection = () => {
         </label>
 
         <label className="text-gray-700 text-sm font-bold flex-1">
-          Country
+          País <span className="text-[#f83c5c]">*</span>
           <input
             type="text"
             className="border rounded w-full py-1 px-2 font-normal"
@@ -85,7 +85,7 @@ const DetailsSection = () => {
         </label>
       </div>
       <label className="text-gray-700 text-sm font-bold flex-1">
-        Descripcion
+        Descripción <span className="text-[#f83c5c]">*</span>
         <textarea
           rows={10}
           className="border rounded w-full py-1 px-2 font-normal"
@@ -96,7 +96,7 @@ const DetailsSection = () => {
         )}
       </label>
       <label className="text-gray-700 text-sm font-bold max-w-[50%]">
-        Precio por Dia
+        Precio por Día <span className="text-[#f83c5c]">*</span>
         <input
           type="number"
           min={1}
@@ -108,7 +108,7 @@ const DetailsSection = () => {
         )}
       </label>
       <label className="text-gray-700 text-sm font-bold max-w-[50%]">
-        Estrellas de Calificacion
+        Estrellas de Calificación <span className="text-[#f83c5c]">*</span>
         <select
           {...register("starRating", {
             required: "This field is required",
@@ -128,7 +128,7 @@ const DetailsSection = () => {
       </label>
       <h2 className="text-2xl font-bold mb-3">Dirección</h2>
       <label className="text-gray-700 text-sm font-bold flex-1">
-        Tipo de Vía Principal
+        Tipo de Vía Principal <span className="text-[#f83c5c]">*</span>
         <select
           {...register("tipo_via_principal", {
             required: "This field is required",
@@ -156,7 +156,7 @@ const DetailsSection = () => {
         )}
       </label>
       <label className="text-gray-700 text-sm font-bold flex-1">
-        Vía Principal
+        Vía Principal <span className="text-[#f83c5c]">*</span>
         <input
           type="text"
           className="border rounded w-full py-1 px-2 font-normal"
@@ -168,7 +168,7 @@ const DetailsSection = () => {
         )}
       </label>
       <label className="text-gray-700 text-sm font-bold flex-1">
-        Vía Secundaria
+        Vía Secundaria <span className="text-[#f83c5c]">*</span>
         <input
           type="text"
           className="border rounded w-full py-1 px-2 font-normal"
@@ -177,7 +177,7 @@ const DetailsSection = () => {
         ></input>
       </label>
       <label className="text-gray-700 text-sm font-bold flex-1">
-        Complemento
+        Complemento <span className="text-[#f83c5c]">*</span>
         <input
           type="text"
           className="border rounded w-full py-1 px-2 font-normal"

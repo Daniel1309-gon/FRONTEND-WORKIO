@@ -13,7 +13,7 @@ const GuestsSection = () => {
       <h2 className="text-2xl font-bold mb-3">Participantes</h2>
       <div className="grid grid-cols-2 p-6 gap-5 bg-gray-300">
         <label className="text-gray-700 text-sm font-semibold">
-          Asistentes
+          Asistentes <span className="text-[#f83c5c]">*</span>
           <input
             className="border rounded w-full py-2 px-3 font-normal"
             type="number"
@@ -29,7 +29,7 @@ const GuestsSection = () => {
           )}
         </label>
         <label className="text-gray-700 text-sm font-semibold">
-          Visitantes
+          Visitantes <span className="text-[#f83c5c]">*</span>
           <input
             className="border rounded w-full py-2 px-3 font-normal"
             type="number"
