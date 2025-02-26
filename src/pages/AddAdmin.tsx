@@ -100,7 +100,7 @@ const AddAdmin = () => {
           )}
 
           <label className="text-gray-700 text-sm font-bold">
-            Usuario
+            Usuario <span className="text-[#f83c5c]">*</span>
             <input
               className="border rounded w-full py-2 px-3 font-normal mt-1"
               type="text"
@@ -111,7 +111,7 @@ const AddAdmin = () => {
           </label>
 
           <label className="text-gray-700 text-sm font-bold">
-            Contraseña
+            Contraseña <span className="text-[#f83c5c]">*</span>
             <input
               className="border rounded w-full py-2 px-3 font-normal mt-1"
               type="password"
@@ -150,7 +150,7 @@ const AddAdmin = () => {
         </div>
 
         <label className="text-gray-700 text-sm font-bold">
-          Nombre de la Empresa
+          Nombre de la Empresa <span className="text-[#f83c5c]">*</span>
           <input
             className="border rounded w-full py-2 px-3 font-normal mt-1 "
             autoComplete="off"
@@ -160,7 +160,7 @@ const AddAdmin = () => {
         </label>
 
         <label className="text-gray-700 text-sm font-bold">
-          NIT
+          NIT <span className="text-[#f83c5c]">*</span>
           <input
             className="border rounded w-full py-2 px-3 font-normal mt-1"
             autoComplete="off"
@@ -170,7 +170,7 @@ const AddAdmin = () => {
         </label>
 
         <label className="text-gray-700 text-sm font-bold">
-          Correo Electrónico
+          Email <span className="text-[#f83c5c]">*</span>
           <input
             type="email"
             className="border rounded w-full py-2 px-3 font-normal mt-1"
@@ -187,7 +187,7 @@ const AddAdmin = () => {
         </label>
 
         <label className="text-gray-700 text-sm font-bold">
-          Teléfono
+          Teléfono <span className="text-[#f83c5c]">*</span>
           <input
             className="border rounded w-full py-2 px-3 font-normal mt-1"
             autoComplete="off"
@@ -197,7 +197,7 @@ const AddAdmin = () => {
         </label>
 
         <label className="text-gray-700 text-sm font-bold">
-          Dirección
+          Dirección <span className="text-[#f83c5c]">*</span>
           <input
             className="border rounded w-full py-2 px-3 font-normal mt-1"
             autoComplete="off"
