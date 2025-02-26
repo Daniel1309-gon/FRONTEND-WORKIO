@@ -65,7 +65,7 @@ const RegisterAdmin = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <label className="text-gray-700 text-sm font-bold">
-          Nombre de la Empresa
+          Nombre de la Empresa <span className="text-[#f83c5c]">*</span>
           <input
             className="border rounded w-full py-1 px-2 font-normal"
             {...register("nombre", { required: "Este campo es requerido" })}
@@ -76,7 +76,7 @@ const RegisterAdmin = () => {
         </label>
 
         <label className="text-gray-700 text-sm font-bold">
-          NIT
+          NIT <span className="text-[#f83c5c]">*</span>
           <input
             className="border rounded w-full py-1 px-2 font-normal"
             {...register("nit", { 
@@ -94,7 +94,7 @@ const RegisterAdmin = () => {
       </div>
 
       <label className="text-gray-700 text-sm font-bold">
-        Dirección
+        Dirección <span className="text-[#f83c5c]">*</span>
         <input
           className="border rounded w-full py-1 px-2 font-normal"
           {...register("direccion", { required: "Este campo es requerido" })}
@@ -106,7 +106,7 @@ const RegisterAdmin = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <label className="text-gray-700 text-sm font-bold">
-          Teléfono
+          Teléfono <span className="text-[#f83c5c]">*</span>
           <input
             type="tel"
             className="border rounded w-full py-1 px-2 font-normal"
@@ -124,7 +124,7 @@ const RegisterAdmin = () => {
         </label>
 
         <label className="text-gray-700 text-sm font-bold">
-          Email
+          Email <span className="text-[#f83c5c]">*</span>
           <input
             type="email"
             className="border rounded w-full py-1 px-2 font-normal"
@@ -153,7 +153,7 @@ const RegisterAdmin = () => {
             e.preventDefault();
             openModal(<TermsOfService />);
           }}>
-            Acepto los términos de tratamiento de datos personales
+            Acepto los términos de tratamiento de datos personales <span className="text-[#f83c5c]">*</span>
           </button>
         </span>
       </label>
