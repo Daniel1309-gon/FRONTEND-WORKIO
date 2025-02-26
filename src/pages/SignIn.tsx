@@ -59,7 +59,7 @@ const SignIn = () => {
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
       <h2 className="text-3xl font-bold">Iniciar Sesion</h2>
       <label className="text-gray-700 text-sm font-bold flex-1">
-        Email
+        Email <span className="text-[#f83c5c]">*</span>
         <input
           type="email"
           className="border rounded w-full py-1 px-2 font-normal"
@@ -70,7 +70,7 @@ const SignIn = () => {
         )}
       </label>
       <label className="text-gray-700 text-sm font-bold flex-1">
-        Contraseña
+        Contraseña <span className="text-[#f83c5c]">*</span>
         <input
           type="password"
           className="border rounded w-full py-1 px-2 font-normal"
