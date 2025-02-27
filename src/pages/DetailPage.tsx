@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import { HotelType } from "../../shared/types";
+import { useSearchContext } from "../contexts/SearchContext";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -10,9 +12,10 @@ import ImageCarousel from "../components/ImgCarousel";
 
 const DetailPage = () => {
   const { idsede } = useParams<{ idsede: string }>();
+  const search = useSearchContext();
   const [hotel, setHotel] = useState<HotelType | null>(null);
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [startDate, setStartDate] = useState<Date | null>(search.checkIn);
+  const [endDate, setEndDate] = useState<Date | null>(search.checkOut);
   const [reservationDate, setReservationDate] = useState<Date | null>(null); // Fecha para reserva por horas
   const [startTime, setStartTime] = useState<Date | null>(null);
   const [endTime, setEndTime] = useState<Date | null>(null);
@@ -188,13 +191,13 @@ const DetailPage = () => {
             </p>
             <p className="text-gray-700">
               <span className="font-semibold">Subtotal por hora:</span> $
-              {(hotel.price_per_day / 24).toFixed(2)}
+              {(hotel.price_per_day / 8).toFixed(2)}
             </p>
             <p className="text-gray-700">
               <span className="font-semibold">
                 Total por hora (con impuestos y comisión de pasarela):
               </span>{" "}
-              ${roundToNearest500((hotel.price_per_day / 24).toFixed(2) * 1.15 / 0.9406)}
+              ${(roundToNearest500((hotel.price_per_day / 8) * 1.15 / 0.9406)).toFixed(2)}
             </p>
           </div>
 

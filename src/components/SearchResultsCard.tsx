@@ -72,7 +72,7 @@ const SearchResultsCard = ({ hotel }: Props) => {
       {/* Precio y botón */}
       <div className="flex flex-col items-end gap-2">
         <span className="text-sm   font-bold text-gray-900">${hotel.price_per_day} por día</span>
-        <span className="text-sm   font-bold text-gray-900">${(hotel.price_per_day / 24).toFixed(2)} por hora</span>
+        <span className="text-sm   font-bold text-gray-900">${(hotel.price_per_day / 8).toFixed(2)} por hora</span>
         <Link
           to={`/coworkings/${hotel._id ?? hotel.idsede}`}
           className="bg-blue-600 text-white px-4 py-2 font-bold text-lg rounded-lg hover:bg-blue-500 transition-all"
