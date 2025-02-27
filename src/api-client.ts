@@ -35,10 +35,15 @@ export const fetchCurrentAdmin = async (): Promise<AdminType> => {
   return response.json();
 };
 
-export const fetchEmpresa = async (id_empresa: string): Promise<EmpresaType> => {
-  const response = await fetch(`${API_BASE_URL}/api/admins/empresas/${id_empresa}`, {
-    credentials: "include",
-  });
+export const fetchEmpresa = async (
+  id_empresa: string
+): Promise<EmpresaType> => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/admins/empresas/${id_empresa}`,
+    {
+      credentials: "include",
+    }
+  );
   if (!response.ok) {
     throw new Error("Error obteniendo empresa");
   }
@@ -211,12 +216,17 @@ export const getOfficeTypesBySede = async (idsede: number) => {
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/my-coworkings/${idsede}/office-types`, {
-      credentials: "include",
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/api/my-coworkings/${idsede}/office-types`,
+      {
+        credentials: "include",
+      }
+    );
 
     if (!response.ok) {
-      throw new Error(`Error al obtener las oficinas: ${response.status} ${response.statusText}`);
+      throw new Error(
+        `Error al obtener las oficinas: ${response.status} ${response.statusText}`
+      );
     }
 
     return await response.json();
@@ -226,12 +236,18 @@ export const getOfficeTypesBySede = async (idsede: number) => {
   }
 };
 
-export const updateOfficeAvailability = async (idFacilidad: number, disponibilidad: boolean) => {
-  const response = await fetch(`${API_BASE_URL}/api/coworkings/office-types/${idFacilidad}/availability`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ disponibilidad }),
-  });
+export const updateOfficeAvailability = async (
+  idFacilidad: number,
+  disponibilidad: boolean
+) => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/coworkings/office-types/${idFacilidad}/availability`,
+    {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ disponibilidad }),
+    }
+  );
 
   if (!response.ok) {
     throw new Error("Error al actualizar la disponibilidad");
@@ -239,19 +255,24 @@ export const updateOfficeAvailability = async (idFacilidad: number, disponibilid
   return response.json();
 };
 
-
-export const createOfficeType = async (idsede: number, officeType: {
-  nombre: string;
-  tipo: string;
-  descripcion?: string;
-  capacidad: number; // Se agregó capacidad
-}) => {
-  const response = await fetch(`${API_BASE_URL}/api/my-coworkings/${idsede}/office-types`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(officeType), // Se asegura de incluir capacidad
-    credentials: "include",
-  });
+export const createOfficeType = async (
+  idsede: number,
+  officeType: {
+    nombre: string;
+    tipo: string;
+    descripcion?: string;
+    capacidad: number; // Se agregó capacidad
+  }
+) => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/my-coworkings/${idsede}/office-types`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(officeType), // Se asegura de incluir capacidad
+      credentials: "include",
+    }
+  );
 
   if (!response.ok) {
     throw new Error("Error creando el tipo de oficina");
@@ -259,8 +280,6 @@ export const createOfficeType = async (idsede: number, officeType: {
 
   return response.json();
 };
-
-
 
 export const updateMyHotelById = async (
   sedeFormData: FormData,
@@ -289,7 +308,18 @@ export const deleteCoworking = async (idsede: string) => {
   });
 
   if (!response.ok) {
-    throw new Error("Error deleting coworking");
+    throw new Error("Error eliminando sede");
+  }
+};
+
+export const deleteMyUser = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/users/delete/me`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error borrando tú cuenta");
   }
 };
 

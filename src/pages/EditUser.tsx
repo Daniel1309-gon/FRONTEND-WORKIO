@@ -6,8 +6,10 @@ import { useState, useEffect } from "react"; // Importamos useEffect
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import PasswordStrengthMeter from "../components/PasswordStrengthMeter"; // Importamos el nuevo componente
+import Modal from '../components/DeleteUserModal'
 
 export type UserFormData = {
+  idusuario: number;
   firstName: string;
   lastName: string;
   password: string;
@@ -33,6 +35,8 @@ const EditUser = () => {
   const [isPasswordModified] = useState(false); // Estado para saber si la contraseña fue modificada
   const [password, setPassword] = useState(""); // Estado para la contraseña
   const [showPassword, setShowPassword] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [confirmText, setConfirmText] = useState("");
   // Prellenamos los campos con los datos del usuario
   useEffect(() => {
     if (userFirstName) setValue("firstName", userFirstName);
@@ -60,6 +64,27 @@ const EditUser = () => {
       },
     }
   );
+
+  const deleteMutation = useMutation(
+    () => apiClient.deleteMyUser(),
+    {
+      onSuccess: () => {
+        showToast({ message: "Cuenta eliminada correctamente", type: "SUCCESS" });
+        navigate("/");
+      },
+      onError: () => {
+        showToast({ message: "Error al eliminar la cuenta", type: "ERROR" });
+      },
+    }
+  );
+
+  const handleDelete = () => {
+    if (confirmText === "deseo eliminar mi cuenta") {
+      deleteMutation.mutate();
+    } else {
+      showToast({ message: "El texto ingresado no es correcto", type: "ERROR" });
+    }
+  };
 
   // Función para evaluar la fortaleza de la contraseña
 
@@ -92,6 +117,7 @@ const EditUser = () => {
   });
 
   return (
+    <>
     <form onSubmit={onSubmit}>
       <h2 className="text-3xl font-bold">Editar usuario</h2>
       <div className="flex p-5 gap-2">
@@ -198,11 +224,30 @@ const EditUser = () => {
         <button
           type="button"
           className="bg-red-500 text-white p-2 font-bold hover:bg-red-600 text-xl"
+          onClick={()=>setIsModalOpen(true)}
         >
           Eliminar
         </button>
       </div>
     </form>
+
+    {isModalOpen && (
+        <Modal onClose={() => setIsModalOpen(false)}>
+          <h2 className="text-xl font-bold">Confirmar eliminación</h2>
+          <p className="mt-2">Para eliminar tu cuenta, escribe <strong>"deseo eliminar mi cuenta"</strong> en el campo de abajo.</p>
+          <input
+            type="text"
+            className="border rounded w-full p-2 mt-3"
+            value={confirmText}
+            onChange={(e) => setConfirmText(e.target.value)}
+          />
+          <div className="flex justify-end mt-4">
+            <button className="bg-gray-400 text-white p-2 font-bold mr-2" onClick={() => setIsModalOpen(false)}>Cancelar</button>
+            <button className="bg-red-500 text-white p-2 font-bold" onClick={handleDelete} disabled={confirmText !== "deseo eliminar mi cuenta"}>Eliminar</button>
+          </div>
+        </Modal>
+      )}
+    </>
   );
 };
 
