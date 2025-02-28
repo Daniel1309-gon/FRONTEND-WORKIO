@@ -1,5 +1,6 @@
 import { RegisterFormData } from "./pages/Register";
 import { RegisterFormDataAdmin } from "./pages/RegisterAdmin";
+import { AprobeEmpresaFormData } from "./pages/AddAdmin";
 import { UserFormData } from "./pages/EditUser";
 import { SignInFormData } from "./pages/SignIn";
 import { RecoverPasswordFormData } from "./pages/RecoverPassword";
@@ -36,10 +37,14 @@ export const fetchCurrentAdmin = async (): Promise<AdminType> => {
 };
 
 export const fetchEmpresa = async (
-  id_empresa: string
+  email?: string
 ): Promise<EmpresaType> => {
+  const url = email
+    ? `${API_BASE_URL}/api/admins/empresas/${email}`
+    : `${API_BASE_URL}/api/admins/empresas`;
+
   const response = await fetch(
-    `${API_BASE_URL}/api/admins/empresas/${id_empresa}`,
+    url,
     {
       credentials: "include",
     }
@@ -84,8 +89,8 @@ export const registerAdmin = async (formData: RegisterFormDataAdmin) => {
   }
 };
 
-export const addAdmin = async (formData: RegisterFormDataAdmin) => {
-  const response = await fetch(`${API_BASE_URL}/api/admins/register`, {
+export const promoteAdmin = async (formData: AprobeEmpresaFormData) => {
+  const response = await fetch(`${API_BASE_URL}/api/admins/promoteadmin`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -95,7 +100,6 @@ export const addAdmin = async (formData: RegisterFormDataAdmin) => {
   });
 
   const responseBody = await response.json();
-  console.log(responseBody);
   if (!response.ok) {
     throw new Error(responseBody.message);
   }

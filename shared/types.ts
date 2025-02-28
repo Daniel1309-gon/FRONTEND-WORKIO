@@ -14,6 +14,7 @@ export type EmpresaType = {
     idDireccion: number;
     telefono: string;
     email: string;
+    active: boolean;
   };
 
 export type AdminType = {
