@@ -62,7 +62,7 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
   const { data: dataEmpresa } = useQuery<EmpresaType>(
     ["fetchEmpresa", userRole === "admin" ? (userData as AdminType)?.idempresa : null],
     async () => {
-      return apiClient.fetchEmpresa((userData as AdminType).idempresa);
+      return apiClient.fetchCurrentEmpresa((userData as AdminType).idempresa);
     },
     {
       enabled: userRole === "admin" && !!(userData as AdminType)?.idempresa,

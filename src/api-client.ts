@@ -24,6 +24,7 @@ export const fetchCurrentUser = async (): Promise<UserType> => {
     throw new Error("Error obteniendo usuario");
   }
   return response.json();
+  return response.json();
 };
 
 export const fetchCurrentAdmin = async (): Promise<AdminType> => {
@@ -36,7 +37,20 @@ export const fetchCurrentAdmin = async (): Promise<AdminType> => {
   return response.json();
 };
 
-export const fetchEmpresa = async (
+export const fetchCurrentEmpresa = async (id_empresa: string): Promise<EmpresaType> => {
+  const response = await fetch(`${API_BASE_URL}/api/admins/empresa/me/${id_empresa}`, {
+    method: "POST",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error obteniendo empresa");
+  }
+
+  return response.json();
+};
+
+export const searchEmpresas = async (
   email?: string
 ): Promise<EmpresaType> => {
   const url = email
