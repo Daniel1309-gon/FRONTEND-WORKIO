@@ -313,7 +313,7 @@ const AddAdmin = () => {
                     <th className="border p-2 text-left">Nombre</th>
                     <th className="border p-2 text-left">Email</th>
                     <th className="border p-2 text-left">NIT</th>
-                    <th className="border p-2 text-left">ID Empresa</th>
+                    <th className="border p-2 text-left">Teléfono</th>
                     <th className="border p-2 text-left w-24">Estado</th>
                     <th className="border p-2 text-left w-24">Acciones</th>
                   </tr>
